@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export class ProductModel {
   constructor(params) {
     params = params || {};
@@ -5,5 +7,7 @@ export class ProductModel {
 
     this.name = params.name || '';
     this.description = params.description || '';
+    this.createdAt = params.createdAt || moment().format();
+    this.updatedAt = params.updatedAt || moment().format();
   }
 }

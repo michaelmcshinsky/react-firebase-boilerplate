@@ -1,16 +1,15 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import PublicLayout from '@components/layouts/public';
-import { PublicRoute } from '@components/routes';
+import { PublicDefaultLayout, PublicRoute } from '@components';
 
 import Home from './home';
 import Contact from './contact';
 import NotFound from './not-found';
 import { ForgotPassword, Login, Register } from './auth';
 
-export default function PublicRoutes() {
+export function PublicRoutes() {
   return (
-    <PublicLayout>
+    <PublicDefaultLayout>
       <Switch>
         <PublicRoute exact path='/' component={Home} />
         <PublicRoute path='/contact' component={Contact} />
@@ -23,6 +22,6 @@ export default function PublicRoutes() {
         />
         <PublicRoute path='*' component={NotFound} />
       </Switch>
-    </PublicLayout>
+    </PublicDefaultLayout>
   );
 }
