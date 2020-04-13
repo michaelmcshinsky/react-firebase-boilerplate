@@ -12,16 +12,18 @@ Created to make my own life and others easier without having to recreate the whe
 
 ## Features
 
-- Babel
+- Authentication
+  * Login
+  * Logout
+  * Registration
+  * Password Recovery / Reset
+- Authorization
+  * Claims & Roles (Admin, Editor, Employe, etc...)
+- Admin Panel
 - Firebase
-- React (Create React App)
-- React Router
-- React Table
-- Reactstrap
-- Redux
-- Toastr
-- Webpack
-- And (a little bit) More!!!
+  * Firestore / Managed Rules
+  * Hosting
+  * Functions
 
 ## Instructions
 
@@ -36,7 +38,10 @@ Created to make my own life and others easier without having to recreate the whe
 ## Production Todos
 
 - [x] Create example views
+- [ ] Create claim & role based authorization
+- [ ] Create testing suite
 - [ ] Update firestore rules
+- [ ] Create firebase storage use case with rules
 - [ ] Consolidate view code into more consumable components
 - [ ] Solidify readme with more information about project
 - [ ] Add social login options / components
