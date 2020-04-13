@@ -35,7 +35,7 @@ Created to make my own life and others easier without having to recreate the whe
 
 ## Production Todos
 
-- [x] Create example viewsc
+- [x] Create example views
 - [ ] Update firestore rules
 - [ ] Consolidate view code into more consumable components
 - [ ] Solidify readme with more information about project
