@@ -1,4 +1,4 @@
-# ⚛️ React Firebase Starter Kit 🔥
+# React Firebase Starter Kit
 
 Author: [Michael McShinsky](https://www.linkedin.com/in/michaelmcshinsky)
 
