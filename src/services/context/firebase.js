@@ -1,24 +1,50 @@
 import React from 'react';
-import Firebase from '@constants/firebase';
+import { Provider } from 'react-redux';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/functions';
+import { createStore, combineReducers } from 'redux';
+import {
+  ReactReduxFirebaseProvider,
+  firebaseReducer,
+} from 'react-redux-firebase';
+import { createFirestoreInstance, firestoreReducer } from 'redux-firestore';
 
-const FirebaseContext = React.createContext();
+import { fbConfig } from '@constants';
 
 export function FirebaseProvider({ children }) {
-  const [firebase, setFirebase] = React.useState(new Firebase());
+  const rrfConfig = {
+    userProfile: 'users',
+    useFirestoreForProfile: true,
+    enableClaims: true,
+  };
+
+  firebase.initializeApp(fbConfig);
+
+  firebase.firestore();
+  firebase.functions();
+
+  const rootReducer = combineReducers({
+    firebase: firebaseReducer,
+    firestore: firestoreReducer,
+  });
+
+  const initialState = {};
+  const store = createStore(rootReducer, initialState);
+
+  const rrfProps = {
+    firebase,
+    config: rrfConfig,
+    dispatch: store.dispatch,
+    createFirestoreInstance,
+  };
 
   return (
-    <FirebaseContext.Provider value={{ firebase, setFirebase }}>
-      {children}
-    </FirebaseContext.Provider>
+    <Provider store={store}>
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        {children}
+      </ReactReduxFirebaseProvider>
+    </Provider>
   );
 }
-
-function useFirebase() {
-  const context = React.useContext(FirebaseContext);
-  if (context === undefined) {
-    throw new Error(`useFirebase must be used within a FirebaseProvider`);
-  }
-  return context;
-}
-
-export { useFirebase, FirebaseContext };

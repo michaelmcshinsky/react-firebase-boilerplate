@@ -33,7 +33,6 @@ export function ForgotPassword() {
     firebase
       .resetPassword(email)
       .then((res) => {
-        console.log('res', res);
         setMessage({
           text: 'A request has been submitting to the provided email.',
           type: 'info',

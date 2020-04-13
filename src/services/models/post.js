@@ -1,12 +1,14 @@
 import moment from 'moment';
 
-export class ProductModel {
+export class PostModel {
   constructor(params) {
     params = params || {};
     Object.assign(this, params);
 
     this.name = params.name || '';
-    this.description = params.description || '';
+    this.title = params.title || '';
+    this.summary = params.summary || '';
+    this.body = params.body || '';
     this.createdAt = params.createdAt || moment().format();
     this.updatedAt = params.updatedAt || moment().format();
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
-
-import './home.scss';
+import { Newsletter } from '@components';
+import { TeamMember, WelcomeLead } from './components';
 
 export default function Home() {
   return (
@@ -28,37 +28,25 @@ export default function Home() {
             <Col sm='12'>
               <Row>
                 <Col sm='4'>
-                  <div className='text-center'>
-                    <div className='features-icon d-flex'>
-                      <i className='las la-desktop m-auto text-primary'></i>
-                    </div>
-                    <h4>Title</h4>
-                    <p className='lead mb-0'>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                  </div>
+                  <WelcomeLead
+                    icon='desktop'
+                    title='Title'
+                    body='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                  />
                 </Col>
                 <Col sm='4'>
-                  <div className='text-center'>
-                    <div className='features-icon d-flex'>
-                      <i className='las la-layer-group m-auto text-primary'></i>
-                    </div>
-                    <h4>Title</h4>
-                    <p className='lead mb-0'>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                  </div>
+                  <WelcomeLead
+                    icon='layer-group'
+                    title='Title'
+                    body='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                  />
                 </Col>
                 <Col sm='4'>
-                  <div className='text-center'>
-                    <div className='features-icon d-flex'>
-                      <i className='las la-check-circle m-auto text-primary'></i>
-                    </div>
-                    <h4>Title</h4>
-                    <p className='lead mb-0'>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                  </div>
+                  <WelcomeLead
+                    icon='check-circle'
+                    title='Title'
+                    body='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                  />
                 </Col>
               </Row>
             </Col>
@@ -68,45 +56,93 @@ export default function Home() {
       <section id='home-showcase'>
         <Container fluid className='p-0'>
           <Row noGutters>
-            <Col lg={{ size: 6, order: 2 }} className='home-showcase-img'></Col>
-            <Col lg={{ size: 6, order: 1 }} className='my-auto px-5'>
-              <h2>Why a starter kit?</h2>
-              <p className='lead mg-0'>
-                Created to help myself and others get projects off the ground
-                and running without having to create the same code for every
-                project over and over and over and over...
-              </p>
+            <Col md={{ size: 6, order: 2 }} className='home-showcase-img'></Col>
+            <Col md={{ size: 6, order: 1 }} className='my-auto px-5'>
+              <div className='my-5'>
+                <h2>Why a starter kit?</h2>
+                <p className='lead mb-0'>
+                  Created to help myself and others get projects off the ground
+                  and running without having to create the same code for every
+                  project over and over and over and over...
+                </p>
+              </div>
             </Col>
           </Row>
           <Row noGutters>
-            <Col lg={{ size: 6, order: 1 }} className='home-showcase-img'></Col>
-            <Col lg={{ size: 6, order: 2 }} className='my-auto px-5'>
-              <h2>A Dash of Opinion</h2>
-              <p className='lead mg-0'>
-                Some sense of structure is good and so this was built to get the
-                job done but not so opinionated that you can't change the flow
-                and structure to match your teams needs.
-              </p>
+            <Col md={{ size: 6, order: 1 }} className='home-showcase-img'></Col>
+            <Col md={{ size: 6, order: 2 }} className='my-auto px-5'>
+              <div className='my-5'>
+                <h2>A Dash of Opinion</h2>
+                <p className='lead mb-0'>
+                  Some sense of structure is good and so this was built to get
+                  the job done but not so opinionated that you can't change the
+                  flow and structure to match your teams needs.
+                </p>
+              </div>
             </Col>
           </Row>
           <Row noGutters>
-            <Col lg={{ size: 6, order: 2 }} className='home-showcase-img'></Col>
-            <Col lg={{ size: 6, order: 1 }} className='my-auto px-5'>
-              <h2>What's baked in?</h2>
-              <p className='lead mg-0'>
-                Firebase, Bootstrap and React are the primary ingredients.
-                Everything else is a sprinkling of enhancement to make the
-                experience more delightful while not getting in your way.
-              </p>
+            <Col md={{ size: 6, order: 2 }} className='home-showcase-img'></Col>
+            <Col md={{ size: 6, order: 1 }} className='my-auto px-5'>
+              <div className='my-5'>
+                <h2>What's baked in?</h2>
+                <p className='lead mb-0'>
+                  Firebase, Bootstrap and React are the primary ingredients.
+                  Everything else is a sprinkling of enhancement to make the
+                  experience more delightful while not getting in your way.
+                </p>
+              </div>
             </Col>
           </Row>
         </Container>
       </section>
-      https://startbootstrap.com/previews/simple-sidebar/
-      <br />
-      https://startbootstrap.com/previews/sb-admin-2/
-      <br />
-      https://startbootstrap.com/previews/landing-page/
+      <section id='home-about' className='home-section text-center bg-light'>
+        <h2 className='mb-5'>Meet the Team</h2>
+        <Row>
+          <Col md='4'>
+            <TeamMember
+              src='//via.placeholder.com/200x200/007bff/ffffff?text=Team+Member'
+              title='Lorem ipsum dolor sit amet'
+            />
+          </Col>
+          <Col md='4'>
+            <TeamMember
+              src='//via.placeholder.com/200x200/007bff/ffffff?text=Team+Member'
+              title='Lorem ipsum dolor sit amet'
+            />
+          </Col>
+          <Col md='4'>
+            <TeamMember
+              src='//via.placeholder.com/200x200/007bff/ffffff?text=Team+Member'
+              title='Lorem ipsum dolor sit amet'
+            />
+          </Col>
+          <Col md='4'>
+            <TeamMember
+              src='//via.placeholder.com/200x200/007bff/ffffff?text=Team+Member'
+              title='Lorem ipsum dolor sit amet'
+            />
+          </Col>
+          <Col md='4'>
+            <TeamMember
+              src='//via.placeholder.com/200x200/007bff/ffffff?text=Team+Member'
+              title='Lorem ipsum dolor sit amet'
+            />
+          </Col>
+          <Col md='4'>
+            <TeamMember
+              src='//via.placeholder.com/200x200/007bff/ffffff?text=Team+Member'
+              title='Lorem ipsum dolor sit amet'
+            />
+          </Col>
+        </Row>
+      </section>
+      <section
+        id='home-newsletter'
+        className='home-section bg-secondary text-white'
+      >
+        <Newsletter />
+      </section>
     </>
   );
 }

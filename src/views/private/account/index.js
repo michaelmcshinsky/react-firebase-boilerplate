@@ -9,7 +9,7 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
 } from 'reactstrap';
 import moment from 'moment';
 import { PageLayout, PageTitle } from '@components';
@@ -36,7 +36,7 @@ const reducer = (state = {}, action) => {
 export default function Account() {
   const [user, dispatch] = React.useReducer(reducer, new UserModel());
   const firestore = useFirestore();
-  const auth = useSelector(state => state.firebase.auth);
+  const auth = useSelector((state) => state.firebase.auth);
   const api = firestore.collection('users');
 
   React.useEffect(() => {
@@ -52,7 +52,7 @@ export default function Account() {
       api
         .doc(auth.uid)
         .get()
-        .then(doc => {
+        .then((doc) => {
           dispatch({ type: 'set', payload: { id: doc.id, ...doc.data() } });
         });
     }
@@ -62,21 +62,14 @@ export default function Account() {
     dispatch({
       type: 'handleChange',
       name: e.target.name,
-      value: e.target.value
+      value: e.target.value,
     });
   }
 
   function save(e) {
     e.preventDefault();
-    api
-      .doc(auth.uid)
-      .update(Object.assign({}, user))
-      .then(res => {
-        console.log('res', res);
-      });
+    api.doc(auth.uid).update(Object.assign({}, user));
   }
-
-  console.log('auth', auth);
 
   return (
     <PageLayout>
@@ -100,7 +93,7 @@ export default function Account() {
                 <FormGroup>
                   <Label for='viewAccountLastName'>Last Name</Label>
                   <Input
-                    id='viewAccountFirstName'
+                    id='viewAccountLastName'
                     type='text'
                     name='lastName'
                     value={user.lastName}
@@ -117,25 +110,25 @@ export default function Account() {
                     onChange={handleChange}
                   />
                 </FormGroup>
-                <FormGroup>
-                  <Label for='viewAccountEmail'>Email</Label>
-                  <Input
-                    id='viewAccountEmail'
-                    type='text'
-                    name='email'
-                    defaultValue={user.email}
-                    disabled
-                  />
-                </FormGroup>
                 <Button type='submit' color='primary'>
                   Save
                 </Button>
               </Form>
             </Col>
             <Col md='6' lg='4'>
-              <h2 className='text-xl mb-4'>Advanced</h2>
+              <h2 className='text-xl mb-4'>Additional</h2>
               <FormGroup>
-                <Label>Email Verified</Label>
+                <Label for='viewAccountEmail'>Email</Label>
+                <Input
+                  id='viewAccountEmail'
+                  type='text'
+                  name='email'
+                  defaultValue={user.email}
+                  disabled
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Email Verified?</Label>
                 <Input
                   type='text'
                   name='emailVerified'
@@ -146,20 +139,11 @@ export default function Account() {
                 />
               </FormGroup>
               <FormGroup>
-                <Label>Created At</Label>
-                <Input
-                  type='text'
-                  name='createdAt'
-                  defaultValue={moment(Date(auth.createdAt)).format('LLLL')}
-                  disabled
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Last Login</Label>
+                <Label>Last Login / Accessed</Label>
                 <Input
                   type='text'
                   name='lastLoginAt'
-                  defaultValue={moment(Date(auth.lastLoginAt)).format('LLLL')}
+                  defaultValue={moment(Date(auth.lastLoginAt)).format()}
                   disabled
                 />
               </FormGroup>

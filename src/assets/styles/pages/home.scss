@@ -1,0 +1,26 @@
+#home-banner {
+  padding: 200px 0;
+}
+
+.home-section {
+  padding: 150px 0;
+}
+
+.features-icon {
+  height: 7rem;
+  i {
+    font-size: 5rem;
+    transition: 0.1s ease;
+    &:hover {
+      font-size: 5.5rem;
+    }
+  }
+}
+
+.home-showcase-img {
+  background-image: url('//via.placeholder.com/1020x720/007bff/ffffff?text=Awesome+Image');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 30rem;
+}
