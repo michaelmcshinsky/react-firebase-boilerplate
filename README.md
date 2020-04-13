@@ -2,7 +2,7 @@
 
 Author: [Michael McShinsky](https://www.linkedin.com/in/michaelmcshinsky)
 
-![Twitter Follow](https://img.shields.io/twitter/follow/mikemcshinsky?style=social)
+<a href="https://twitter.com/mikemcshinsky"><img src="https://img.shields.io/twitter/follow/mikemcshinsky.svg?style=social&amp;label=Follow+@mikemcshinsky&amp;maxAge=3600" alt="Twitter" height="20"></a>
 
 ---
 
