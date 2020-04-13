@@ -9,6 +9,7 @@ export class UserModel {
     this.lastName = params.lastName || '';
     this.displayName = params.displayName || '';
     this.email = params.email || '';
+    this.roles = params.roles || [];
     this.createdAt = params.createdAt || moment().format();
     this.updatedAt = params.updatedAt || moment().format();
   }
