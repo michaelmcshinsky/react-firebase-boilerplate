@@ -1,8 +1,6 @@
 # React Firebase Starter Kit
 
-Author: [Michael McShinsky](https://www.linkedin.com/in/michaelmcshinsky)
-
-<a href="https://twitter.com/mikemcshinsky"><img src="https://img.shields.io/twitter/follow/mikemcshinsky.svg?style=social&amp;label=Follow+@mikemcshinsky&amp;maxAge=3600" alt="Twitter" height="20"></a>
+Author: [Michael McShinsky](https://github.com/mmcshinsky) - [Linkedin](https://www.linkedin.com/in/michaelmcshinsky) | [Twitter](https://twitter.com/mikemcshinsky) | [Website](http://mcshinsky.net/)
 
 ---
 
@@ -13,32 +11,32 @@ Created to make my own life and others easier without having to recreate the whe
 ## Features
 
 - React
-  * Function Components and Hooks
-  * Context and Redux State Management
-  * Public and Private Routing
+  - Function Components and Hooks
+  - Context and Redux State Management
+  - Public and Private Routing
 - Styling / CSS
-  * Bootstrap using reactstrap. Like I said... slightly opinionated project.
-  * Plain 'ole css styling in an assets folder. Bring in your styled components package if ya want.
+  - Bootstrap using reactstrap. Like I said... slightly opinionated project.
+  - Plain 'ole css styling in an assets folder. Bring in your styled components package if ya want.
 - Authentication
-  * Login
-  * Logout
-  * Registration
-  * Password Recovery / Reset
+  - Login
+  - Logout
+  - Registration
+  - Password Recovery / Reset
 - Authorization
-  * Claims & Roles (Admin, Editor, Employe, etc...)
+  - Claims & Roles (Admin, Editor, Employe, etc...)
 - Admin Panel
-  * CRUD Tables / Modals for managing Firebase documents
-  * Redux-Firebase with hooks for app wide access to firebase APIs.
+  - CRUD Tables / Modals for managing Firebase documents
+  - Redux-Firebase with hooks for app wide access to firebase APIs.
 - Firebase
-  * Firestore / Managed Rules
-  * Hosting
-  * Functions
+  - Firestore / Managed Rules
+  - Hosting
+  - Functions
 
 ## Instructions
 
 1. Clone the repo: `git clone https://github.com/mmcshinsky/react-firebase-starter.git`
 2. `cd react-firebase-starter`
-3. Update the `.env` file(s) to match your [firebase settings](https://console.firebase.google.com/). (Gotta *"protect"* those keys...)
+3. Update the `.env` file(s) to match your [firebase settings](https://console.firebase.google.com/). (Gotta _"protect"_ those keys...)
 4. `npm install`
 5. `npm start`
 6. Open on [http://localhost:3000/](http://localhost:3000/) to view your app.
