@@ -1,6 +1,6 @@
 # React Firebase Boilerplate
 
-Author: [Michael McShinsky](https://github.com/mmcshinsky/?target=_blank) - [Linkedin](https://www.linkedin.com/in/michaelmcshinsky/?target=_blank) | [Twitter](https://twitter.com/mikemcshinsky/?target=_blank) | [Website](http://mcshinsky.net/?target=_blank)
+Author: [Michael McShinsky](https://github.com/mmcshinsky) - [Linkedin](https://www.linkedin.com/in/michaelmcshinsky) | [Twitter](https://twitter.com/mikemcshinsky) | [Website](http://mcshinsky.net/)
 
 ---
 
