@@ -1,10 +1,10 @@
-# React Firebase Starter Kit
+# React Firebase Boilerplate
 
 Author: [Michael McShinsky](https://github.com/mmcshinsky) - [Linkedin](https://www.linkedin.com/in/michaelmcshinsky) | [Twitter](https://twitter.com/mikemcshinsky) | [Website](http://mcshinsky.net/)
 
 ---
 
-A slightly opinionated yet minimal starter kit or boilerplate for gettings a react firebase project off the ground quickly. Comes with the option to host with firebase as well as managed firestore rules.
+A slightly opinionated yet minimal boilerplate for gettings a react firebase project off the ground quickly. Comes with the option to host with firebase as well as managed firestore rules.
 
 Created to make my own life and others easier without having to recreate the wheel everytime a new project is started.
 
