@@ -34,7 +34,7 @@ export function ForgotPassword() {
       .resetPassword(email)
       .then((res) => {
         setMessage({
-          text: 'A request has been submitting to the provided email.',
+          text: 'A request has been submitting to the email provided.',
           type: 'info',
         });
 
