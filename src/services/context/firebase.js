@@ -11,7 +11,7 @@ import {
 } from 'react-redux-firebase';
 import { createFirestoreInstance, firestoreReducer } from 'redux-firestore';
 
-import { fbConfig } from '@constants';
+import { fbConfig } from '@config';
 
 export function FirebaseProvider({ children }) {
   const rrfConfig = {
