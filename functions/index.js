@@ -30,7 +30,7 @@ exports.createUser = functions.auth.user().onCreate((user) => {
 		id: user.uid,
 		email: user.email,
 		displayName: user.displayName,
-		roles: [],
+		roles: ["employee"],
 		active: true,
 	});
 });
