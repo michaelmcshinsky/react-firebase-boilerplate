@@ -31,7 +31,7 @@ export default function Navigation() {
 
   return (
     <Navbar color='dark' dark expand='md'>
-      <NavbarBrand href='/'>React Firebase Starter</NavbarBrand>
+      <NavbarBrand href='/'>React Firebase Boilerplate</NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className='ml-auto' navbar>
@@ -42,7 +42,7 @@ export default function Navigation() {
           </NavItem>
           <NavItem>
             <NavLink
-              href='https://github.com/mmcshinsky/react-firebase-starter'
+              href='https://github.com/mmcshinsky/react-firebase-boilerplate'
               target='_blank'
             >
               GitHub

@@ -12,7 +12,7 @@ export default function Sidebar() {
         <span role='img' aria-label='react'>
           🔥
         </span>{' '}
-        Starter
+        Boilerplate
       </div>
       <Nav vertical id='app-sidebar-nav'>
         <NavNavItem
