@@ -34,8 +34,8 @@ Created to make my own life and others easier without having to recreate the whe
 
 ## Instructions
 
-1. Clone the repo: `git clone https://github.com/mmcshinsky/react-firebase-starter.git`
-2. `cd react-firebase-starter`
+1. Clone the repo: `git clone https://github.com/mmcshinsky/react-firebase-boilerplate.git`
+2. `cd react-firebase-boilerplate`
 3. Update the `.env` file(s) to match your [firebase settings](https://console.firebase.google.com/). (Gotta _"protect"_ those keys...)
 4. `npm install`
 5. `npm start`
@@ -46,7 +46,7 @@ Created to make my own life and others easier without having to recreate the whe
 
 ### Firestore
 
-The starter kit makes use of redux-firebase to give you access to firestore (and the realtime database) to manage all your data needs. With the use of hooks, you have access to your firebase instance throughout the app. As well, basic firestore rules are set for data security in the firestore.rules file at the root of the project.
+The boilerplate makes use of redux-firebase to give you access to firestore (and the realtime database) to manage all your data needs. With the use of hooks, you have access to your firebase instance throughout the app. As well, basic firestore rules are set for data security in the firestore.rules file at the root of the project.
 
 ### Functions
 
@@ -57,8 +57,8 @@ This projects makes use of firebase functions in order to automate and keep some
 1. onCreate => Store base user information on firestore upon user creation.
 2. onDelete => Set user as `active: false` upon user deletion.
 3. seed => A generalized function set to allow you to seed your firestore with data of your choice.
-    * You will need to set your auth header token from the current user `getIdToken` to hit the endpoint.Documentation can be found [here](https://firebase.google.com/docs/reference/js/firebase.User).
-    * Example Endpoint: `https://your-app-id.cloudfunctions.net/seed`
+   - You will need to set your auth header token from the current user `getIdToken` to hit the endpoint.Documentation can be found [here](https://firebase.google.com/docs/reference/js/firebase.User).
+   - Example Endpoint: `https://your-app-id.cloudfunctions.net/seed`
 
 ## Production Todos
 

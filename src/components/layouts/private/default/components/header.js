@@ -52,7 +52,7 @@ export default function Header(props) {
             </NavItem>
             <NavItem>
               <NavLink
-                href='https://github.com/mmcshinsky/react-firebase-starter'
+                href='https://github.com/mmcshinsky/react-firebase-Boilerplate'
                 target='_blank'
               >
                 GitHub
