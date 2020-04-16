@@ -1,17 +1,22 @@
-# React Firebase Starter Kit
+# React Firebase Boilerplate
 
-Author: [Michael McShinsky](https://www.linkedin.com/in/michaelmcshinsky)
-
-<a href="https://twitter.com/mikemcshinsky"><img src="https://img.shields.io/twitter/follow/mikemcshinsky.svg?style=social&amp;label=Follow+@mikemcshinsky&amp;maxAge=3600" alt="Twitter" height="20"></a>
+Author: [Michael McShinsky](https://github.com/mmcshinsky) - [Linkedin](https://www.linkedin.com/in/michaelmcshinsky) | [Twitter](https://twitter.com/mikemcshinsky) | [Website](http://mcshinsky.net/)
 
 ---
 
-A slightly opinionated yet minimal starter kit or boilerplate for gettings a react firebase project off the ground quickly. Comes with the option to host with firebase as well as managed firestore rules.
+A slightly opinionated yet minimal boilerplate for gettings a react firebase project off the ground quickly. Comes with the option to host with firebase as well as managed firestore rules.
 
 Created to make my own life and others easier without having to recreate the wheel everytime a new project is started.
 
 ## Features
 
+- React
+  - Function Components and Hooks
+  - Context and Redux State Management
+  - Public and Private Routing
+- Styling / CSS
+  - Bootstrap using reactstrap. Like I said... slightly opinionated project.
+  - Plain 'ole css styling in an assets folder. Bring in your styled components package if ya want.
 - Authentication
   - Login
   - Logout
@@ -20,6 +25,8 @@ Created to make my own life and others easier without having to recreate the whe
 - Authorization
   - Claims & Roles (Admin, Editor, Employe, etc...)
 - Admin Panel
+  - CRUD Tables / Modals for managing Firebase documents
+  - Redux-Firebase with hooks for app wide access to firebase APIs.
 - Firebase
   - Firestore / Managed Rules
   - Hosting
@@ -29,7 +36,7 @@ Created to make my own life and others easier without having to recreate the whe
 
 1. Clone the repo: `git clone https://github.com/mmcshinsky/react-firebase-starter.git`
 2. `cd react-firebase-starter`
-3. Update the `.env` file(s) to match your [firebase settings](https://console.firebase.google.com/).
+3. Update the `.env` file(s) to match your [firebase settings](https://console.firebase.google.com/). (Gotta _"protect"_ those keys...)
 4. `npm install`
 5. `npm start`
 6. Open on [http://localhost:3000/](http://localhost:3000/) to view your app.
@@ -59,9 +66,10 @@ This projects makes use of firebase functions in order to automate and keep some
 - [x] Create firebase seed and user functions
 - [ ] Create claim & role based authorization
 - [ ] Create testing suite
+- [ ] Create react-table wrapper with reactstrap
 - [ ] Update firestore rules
 - [ ] Create firebase storage use case with rules
 - [ ] Consolidate view code into more consumable components
 - [ ] Solidify readme with more information about project
 - [ ] Add social login options / components
-- [ ] User reset password on account page
+- [ ] User password reset on account page
