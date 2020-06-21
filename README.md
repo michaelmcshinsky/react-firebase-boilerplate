@@ -32,7 +32,7 @@ Created to make my own life and others easier without having to recreate the whe
   - Hosting
   - Functions
 
-## Instructions
+## Installation
 
 1. Clone the repo: `git clone https://github.com/mmcshinsky/react-firebase-boilerplate.git`
 2. `cd react-firebase-boilerplate`
