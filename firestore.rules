@@ -1,5 +1,27 @@
 service cloud.firestore {
   match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function getRole(rsc) {
+      return rsc.data.roles[request.auth.uid];
+    }
+    
+    function isOneOfRoles(rsc, array) {
+      return isSignedIn() && (getRole(rsc) in array);
+    }
+    
+    function isOwner() {
+    	return isSignedIn && request.auth.uid == request.resource.data.uid;
+    }
+  
+  	match /users/{user} {
+    	allow write: if isOneOfRoles(resource, ['admin']) || isOwner();
+    	allow read: if isOneOfRoles(resource, ['admin', 'editor', 'employee', 'user']);
+      allow create, delete: if isOneOfRoles(resource, ['admin']);
+    }
+    
     match /{document=**} {
       allow read, write: if request.auth.uid != null;
     }
