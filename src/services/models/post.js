@@ -1,15 +1,15 @@
 import moment from 'moment';
 
 export class PostModel {
-  constructor(params) {
-    params = params || {};
-    Object.assign(this, params);
+  constructor (params) {
+    const props = { ...params } || {};
+    Object.assign(this, props);
 
-    this.name = params.name || '';
-    this.title = params.title || '';
-    this.summary = params.summary || '';
-    this.body = params.body || '';
-    this.createdAt = params.createdAt || moment().format();
-    this.updatedAt = params.updatedAt || moment().format();
+    this.name = props.name || '';
+    this.title = props.title || '';
+    this.summary = props.summary || '';
+    this.body = props.body || '';
+    this.createdAt = props.createdAt || moment().format();
+    this.updatedAt = props.updatedAt || moment().format();
   }
 }

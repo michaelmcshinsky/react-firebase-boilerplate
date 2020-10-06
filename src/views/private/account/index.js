@@ -1,42 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useFirestore } from 'react-redux-firebase';
 import {
-  Container,
-  Row,
-  Col,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
+  Container, Row, Col, Button, Form, FormGroup, Label, Input,
 } from 'reactstrap';
 import moment from 'moment';
-import { PageLayout, PageTitle } from '@components';
+import { PageLayout, PageTitle } from '@/components';
 
-import { UserModel } from '@services/models';
+import { UserModel } from '@/services/models';
 
-const reducer = (state = {}, action) => {
-  switch (action.type) {
-    case 'handleChange': {
-      let obj = { ...state, [action.name]: action.value };
-      localStorage.setItem('appUser', JSON.stringify(obj));
-      return obj;
-    }
-    case 'set': {
-      let obj = { ...state, ...action.payload };
-      localStorage.setItem('appUser', JSON.stringify(obj));
-      return obj;
-    }
-    default:
-      throw new Error('Unexpected action');
-  }
-};
-
-export default function Account() {
-  const [user, dispatch] = React.useReducer(reducer, new UserModel());
+export default function Account () {
+  const [state, setState] = useState(new UserModel());
   const firestore = useFirestore();
-  const auth = useSelector((state) => state.firebase.auth);
+  const auth = useSelector(x => x.firebase.auth);
   const api = firestore.collection('users');
 
   React.useEffect(() => {
@@ -44,106 +20,118 @@ export default function Account() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function _getUser() {
+  function _getUser () {
     let appUser = JSON.parse(localStorage.getItem('appUser'));
     if (appUser) {
-      dispatch({ type: 'set', payload: appUser });
+      setState(appUser);
     } else {
       api
         .doc(auth.uid)
         .get()
         .then((doc) => {
-          dispatch({ type: 'set', payload: { id: doc.id, ...doc.data() } });
+          let user = { type: 'set', payload: { id: doc.id, ...doc.data() } };
+
+          setState(user);
+          _updateStorage(user);
         });
     }
   }
 
-  function handleChange(e) {
-    dispatch({
-      type: 'handleChange',
-      name: e.target.name,
-      value: e.target.value,
-    });
+  function _handleChange (e) {
+    setState(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
   }
 
-  function save(e) {
-    e.preventDefault();
-    api.doc(auth.uid).update(Object.assign({}, user));
+  function _updateStorage (obj) {
+    localStorage.setItem('appUser', JSON.stringify(obj));
   }
+
+  function save (e) {
+    e.preventDefault();
+    api.doc(auth.uid).update({ ...state });
+  }
+
+  const lastLoginAtParsed = moment(Date(auth?.lastLoginAt)).format();
 
   return (
     <PageLayout>
-      <div className='d-flex flex-column'>
-        <PageTitle className='mb-4'>Account</PageTitle>
-        <Container className='ml-0 p-0'>
+      <div className="d-flex flex-column">
+        <PageTitle className="mb-4">Account</PageTitle>
+        <Container className="ml-0 p-0">
           <Row>
-            <Col md='6' lg='4'>
-              <h2 className='text-xl mb-4'>General</h2>
-              <Form onSubmit={save}>
+            <Col
+              md="6"
+              lg="4"
+            >
+              <h2 className="text-xl mb-4">General</h2>
+              <Form onSubmit={ save }>
                 <FormGroup>
-                  <Label for='viewAccountFirstName'>First Name</Label>
+                  <Label for="viewAccountFirstName">First Name</Label>
                   <Input
-                    id='viewAccountFirstName'
-                    type='text'
-                    name='firstName'
-                    value={user.firstName}
-                    onChange={handleChange}
+                    id="viewAccountFirstName"
+                    type="text"
+                    name="firstName"
+                    value={ state.firstName }
+                    onChange={ _handleChange }
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label for='viewAccountLastName'>Last Name</Label>
+                  <Label for="viewAccountLastName">Last Name</Label>
                   <Input
-                    id='viewAccountLastName'
-                    type='text'
-                    name='lastName'
-                    value={user.lastName}
-                    onChange={handleChange}
+                    id="viewAccountLastName"
+                    type="text"
+                    name="lastName"
+                    value={ state.lastName }
+                    onChange={ _handleChange }
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label for='viewAccountDisplayName'>Display Name</Label>
+                  <Label for="viewAccountDisplayName">Display Name</Label>
                   <Input
-                    id='viewAccountDisplayName'
-                    type='text'
-                    name='displayName'
-                    value={user.displayName}
-                    onChange={handleChange}
+                    id="viewAccountDisplayName"
+                    type="text"
+                    name="displayName"
+                    value={ state.displayName }
+                    onChange={ _handleChange }
                   />
                 </FormGroup>
-                <Button type='submit' color='primary'>
+                <Button
+                  type="submit"
+                  color="primary"
+                >
                   Save
                 </Button>
               </Form>
             </Col>
-            <Col md='6' lg='4'>
-              <h2 className='text-xl mb-4'>Additional</h2>
+            <Col
+              md="6"
+              lg="4"
+            >
+              <h2 className="text-xl mb-4">Additional</h2>
               <FormGroup>
-                <Label for='viewAccountEmail'>Email</Label>
+                <Label for="viewAccountEmail">Email</Label>
                 <Input
-                  id='viewAccountEmail'
-                  type='text'
-                  name='email'
-                  defaultValue={user.email}
+                  id="viewAccountEmail"
+                  type="text"
+                  name="email"
+                  defaultValue={ state.email }
                   disabled
                 />
               </FormGroup>
               <FormGroup>
                 <Label>Email Verified?</Label>
                 <Input
-                  type='text'
-                  name='emailVerified'
-                  defaultValue={
-                    auth.emailVerified ? 'Yes' : 'No, please check your email.'
-                  }
+                  type="text"
+                  name="emailVerified"
+                  defaultValue={ auth.emailVerified ? 'Yes' : 'No, please check your email.' }
                   disabled
                 />
               </FormGroup>
               <FormGroup>
                 <Label>Last Login / Accessed</Label>
                 <Input
-                  type='text'
-                  name='lastLoginAt'
-                  defaultValue={moment(Date(auth.lastLoginAt)).format()}
+                  type="text"
+                  name="lastLoginAt"
+                  defaultValue={ lastLoginAtParsed }
                   disabled
                 />
               </FormGroup>

@@ -3,7 +3,7 @@ const config = {
   titlePlural: 'Users',
   dataSingle: 'user',
   dataPlural: 'users',
-  collection: 'users'
+  collection: 'users',
 };
 
 export default config;

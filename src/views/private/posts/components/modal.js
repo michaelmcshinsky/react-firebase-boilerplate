@@ -1,57 +1,49 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
+  Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Button,
 } from 'reactstrap';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 import { useFirestore } from 'react-redux-firebase';
-import { PostModel } from '@services/models';
+import { PostModel } from '@/services/models';
 import config from '../config';
 
-export function PostModal(props) {
-  const [model, setModel] = React.useState(new PostModel(props.model));
+export function PostModal (props) {
+  const [state, setState] = React.useState(new PostModel(props.model));
   const firestore = useFirestore();
-  const auth = useSelector((state) => state.firebase.auth);
+  const auth = useSelector(x => x.firebase.auth);
 
-  function handleChange(e) {
-    let obj = { ...model };
-    obj[e.target.name] = e.target.value;
-    setModel(obj);
+  function _handleChange (e) {
+    e.persist();
+    setState(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
   }
 
-  async function submitForm(e) {
+  async function submitForm (e) {
     e.preventDefault();
 
     const api = firestore.collection(config.collection);
 
-    if (model.id) {
+    if (state.id) {
       let submission = {
-        ...model,
+        ...state,
         updatedAt: moment().format(),
       };
       await api
-        .doc(model.id)
-        .update(Object.assign({}, submission))
-        .then((res) => {
+        .doc(state.id)
+        .update({ ...submission })
+        .then(() => {
           props.handleSave(submission, true);
         });
     } else {
       let submission = {
-        ...model,
+        ...state,
         userID: auth.uid,
         createdAt: moment().format(),
         updatedAt: moment().format(),
       };
 
-      await api.add(Object.assign({}, submission)).then((doc_ref) => {
+      await api.add({ ...submission }).then((doc_ref) => {
         submission.id = doc_ref.id;
         props.handleSave(submission, true);
       });
@@ -60,58 +52,65 @@ export function PostModal(props) {
     props.toggle();
   }
 
-  let title = model?.id ? `Edit ${config.title}` : `Add ${config.title}`;
+  let title = state?.id ? `Edit ${config.title}` : `Add ${config.title}`;
 
   return (
-    <Modal isOpen={props.isOpen} centered size='lg'>
+    <Modal
+      isOpen={ props.isOpen }
+      centered
+      size="lg"
+    >
       {props.isOpen && (
-        <Form onSubmit={submitForm}>
-          <ModalHeader toggle={props.toggle}>{title}</ModalHeader>
+        <Form onSubmit={ submitForm }>
+          <ModalHeader toggle={ props.toggle }>{title}</ModalHeader>
           <ModalBody>
             <FormGroup>
-              <Label for={`${config.dataSingle}ModalTitle`}>Title</Label>
+              <Label for={ `${config.dataSingle}ModalTitle` }>Title</Label>
               <Input
-                id={`${config.dataSingle}ModalTitle`}
-                type='text'
-                name='title'
-                value={model.title}
-                onChange={(e) => handleChange(e)}
+                id={ `${config.dataSingle}ModalTitle` }
+                type="text"
+                name="title"
+                value={ state.title }
+                onChange={ _handleChange }
                 required
               />
             </FormGroup>
             <FormGroup>
-              <Label for={`${config.dataSingle}ModalSummary`}>Summary</Label>
+              <Label for={ `${config.dataSingle}ModalSummary` }>Summary</Label>
               <Input
-                id={`${config.dataSingle}ModalSummary`}
-                type='textarea'
-                name='summary'
-                value={model.summary}
-                onChange={(e) => handleChange(e)}
-                rows='3'
+                id={ `${config.dataSingle}ModalSummary` }
+                type="textarea"
+                name="summary"
+                value={ state.summary }
+                onChange={ _handleChange }
+                rows="3"
               />
             </FormGroup>
             <FormGroup>
-              <Label for={`${config.dataSingle}ModalBody`}>Body</Label>
+              <Label for={ `${config.dataSingle}ModalBody` }>Body</Label>
               <Input
-                id={`${config.dataSingle}ModalBody`}
-                type='textarea'
-                name='body'
-                value={model.body}
-                onChange={(e) => handleChange(e)}
-                rows='6'
+                id={ `${config.dataSingle}ModalBody` }
+                type="textarea"
+                name="body"
+                value={ state.body }
+                onChange={ _handleChange }
+                rows="6"
               />
             </FormGroup>
           </ModalBody>
           <ModalFooter>
             <Button
               outline
-              color='secondary'
-              type='button'
-              onClick={props.toggle}
+              color="secondary"
+              type="button"
+              onClick={ props.toggle }
             >
               Cancel
             </Button>
-            <Button color='primary' type='submit'>
+            <Button
+              color="primary"
+              type="submit"
+            >
               Submit
             </Button>
           </ModalFooter>
@@ -120,3 +119,10 @@ export function PostModal(props) {
     </Modal>
   );
 }
+
+PostModal.propTypes = {
+  model: PropTypes.object,
+  handleSave: PropTypes.func,
+  toggle: PropTypes.func,
+  isOpen: PropTypes.bool,
+};
