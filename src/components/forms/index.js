@@ -1,1 +1,1 @@
-export * from './required';
+export * from './Required';

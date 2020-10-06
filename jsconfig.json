@@ -6,11 +6,7 @@
     "checkJs": true,
     "baseUrl": "./src",
     "paths": {
-      "@assets/*": ["./assets/*", "./assets/"],
-      "@components/*": ["./components/*", "./components/"],
-      "@config/*": ["./config/*", "./config/"],
-      "@services/*": ["./services/*", "./services/"],
-      "@views/*": ["./views/*", "./views/"]
+      "@/*": ["./*", "./"]
     }
   }
 }

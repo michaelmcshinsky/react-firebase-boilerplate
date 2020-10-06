@@ -1,16 +1,16 @@
 import moment from 'moment';
 
 export class UserModel {
-  constructor(params) {
-    params = params || {};
-    Object.assign(this, params);
+  constructor (params) {
+    const props = { ...params } || {};
+    Object.assign(this, props);
 
-    this.firstName = params.firstName || '';
-    this.lastName = params.lastName || '';
-    this.displayName = params.displayName || '';
-    this.email = params.email || '';
-    this.roles = params.roles || [];
-    this.createdAt = params.createdAt || moment().format();
-    this.updatedAt = params.updatedAt || moment().format();
+    this.firstName = props.firstName || '';
+    this.lastName = props.lastName || '';
+    this.displayName = props.displayName || '';
+    this.email = props.email || '';
+    this.roles = props.roles || [];
+    this.createdAt = props.createdAt || moment().format();
+    this.updatedAt = props.updatedAt || moment().format();
   }
 }
