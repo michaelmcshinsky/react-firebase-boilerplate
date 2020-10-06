@@ -1,3 +1,3 @@
-export * from './forgot-password';
-export * from './login';
-export * from './register';
+export * from './ForgotPassword';
+export * from './Login';
+export * from './Register';

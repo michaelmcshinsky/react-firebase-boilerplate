@@ -1,13 +1,13 @@
 import moment from 'moment';
 
 export class ProductModel {
-  constructor(params) {
-    params = params || {};
-    Object.assign(this, params);
+  constructor (params) {
+    const props = { ...params } || {};
+    Object.assign(this, props);
 
-    this.name = params.name || '';
-    this.description = params.description || '';
-    this.createdAt = params.createdAt || moment().format();
-    this.updatedAt = params.updatedAt || moment().format();
+    this.name = props.name || '';
+    this.description = props.description || '';
+    this.createdAt = props.createdAt || moment().format();
+    this.updatedAt = props.updatedAt || moment().format();
   }
 }

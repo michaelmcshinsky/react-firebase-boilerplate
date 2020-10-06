@@ -1,2 +1,2 @@
-export * from './team-member';
-export * from './welcome-lead';
+export * from './TeamMember';
+export * from './WelcomeLead';
