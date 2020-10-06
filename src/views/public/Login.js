@@ -11,7 +11,7 @@ const MESSAGE = {
   type: null,
 };
 
-export function Login (props) {
+export default function Login (props) {
   const [state, setState] = useState({
     email: '',
     password: '',

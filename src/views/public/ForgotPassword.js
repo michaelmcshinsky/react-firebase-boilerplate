@@ -10,7 +10,7 @@ const MESSAGE = {
   type: null,
 };
 
-export function ForgotPassword () {
+export default function ForgotPassword () {
   const [state, setState] = useState({
     email: '',
     message: { ...MESSAGE },

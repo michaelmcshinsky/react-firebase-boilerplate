@@ -5,7 +5,9 @@ import { PublicDefaultLayout, PublicRoute } from '@/components';
 import Home from './home';
 import Contact from './Contact';
 import NotFound from './NotFound';
-import { ForgotPassword, Login, Register } from './auth';
+import ForgotPassword from './ForgotPassword';
+import Login from './Login';
+import Register from './Register';
 
 export function PublicRoutes () {
   return (

@@ -21,7 +21,7 @@ const MESSAGE = {
   type: null,
 };
 
-export function Register () {
+export default function Register () {
   const [state, setState] = useState({
     email: '',
     password: '',
