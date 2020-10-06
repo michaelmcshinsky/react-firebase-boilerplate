@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   Container, Row, Col, Form, FormGroup, Label, Input, Button, Alert,
@@ -11,10 +10,9 @@ const MESSAGE = {
   type: null,
 };
 
-export function Login (props) {
+export function ForgotPassword () {
   const [state, setState] = useState({
     email: '',
-    password: '',
     message: { ...MESSAGE },
     isSubmitting: false,
   });
@@ -23,30 +21,25 @@ export function Login (props) {
 
   function _handleChange (e) {
     e.persist();
-    setState(prevState => ({ ...prevState, message: { ...MESSAGE }, [e.target.name]: e.target.value }));
+    setState(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit (e) {
+  function _handleSubmit (e) {
     e.preventDefault();
 
-    setState(prevState => ({
-      ...prevState,
-      isSubmitting: true,
-    }));
+    setState(prevState => ({ ...prevState, isSubmitting: true }));
 
     firebase
-      .login({ email: state.email, password: state.password })
+      .resetPassword(state.email)
       .then(() => {
         setState(prevState => ({
           ...prevState,
-          email: '',
-          password: '',
           isSubmitting: false,
+          message: {
+            text: 'A request has been submitting to the email provided.',
+            type: 'info',
+          },
         }));
-
-        setTimeout(() => {
-          props.history.push('/admin');
-        });
       })
       .catch((err) => {
         setState(prevState => ({
@@ -71,9 +64,9 @@ export function Login (props) {
             lg={{ size: 4, offset: 4 }}
             className="mx-auto"
           >
-            <h1 className="text-center">Login</h1>
+            <h1 className="text-center">Forgot Password</h1>
             {state.message.type && <Alert color={ state.message.type }>{state.message.text}</Alert>}
-            <Form onSubmit={ handleSubmit }>
+            <Form onSubmit={ _handleSubmit }>
               <FormGroup>
                 <Label for="loginEmail">Email</Label>
                 <Input
@@ -88,31 +81,21 @@ export function Login (props) {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="loginPassword">Password</Label>
-                <Input
-                  type="password"
-                  name="password"
-                  id="loginPassword"
-                  required
-                  autoComplete="password"
-                  value={ state.password }
-                  onChange={ _handleChange }
-                />
-              </FormGroup>
-              <FormGroup>
                 <Button
                   color="primary"
                   block
                   className="shadow"
-                  disabled={ state.isSubmitting }
                 >
                   {state.isSubmitting && <i className="las la-spinner la-spin"></i>}
-                  Login
+                  Submit
                 </Button>
               </FormGroup>
               <FormGroup className="d-flex justify-content-between">
-                <Link to="/register">Register</Link>
-                <Link to="/forgot-password">Forgot Password</Link>
+                <Link to="/login">
+                  <i className="las la-arrow-left"></i>
+                  {' '}
+                  Back to Login
+                </Link>
               </FormGroup>
             </Form>
           </Col>
@@ -121,7 +104,3 @@ export function Login (props) {
     </div>
   );
 }
-
-Login.propTypes = {
-  history: PropTypes.object,
-};

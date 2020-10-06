@@ -1,19 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/functions';
 import { createStore, combineReducers } from 'redux';
-import {
-  ReactReduxFirebaseProvider,
-  firebaseReducer,
-} from 'react-redux-firebase';
+import { ReactReduxFirebaseProvider, firebaseReducer } from 'react-redux-firebase';
 import { createFirestoreInstance, firestoreReducer } from 'redux-firestore';
 
-import { fbConfig } from '@config';
+import { fbConfig } from '@/config';
 
-export function FirebaseProvider({ children }) {
+export function FirebaseProvider ({ children }) {
   const rrfConfig = {
     userProfile: 'users',
     useFirestoreForProfile: true,
@@ -41,10 +39,12 @@ export function FirebaseProvider({ children }) {
   };
 
   return (
-    <Provider store={store}>
-      <ReactReduxFirebaseProvider {...rrfProps}>
-        {children}
-      </ReactReduxFirebaseProvider>
+    <Provider store={ store }>
+      <ReactReduxFirebaseProvider { ...rrfProps }>{children}</ReactReduxFirebaseProvider>
     </Provider>
   );
 }
+
+FirebaseProvider.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.array, PropTypes.func]),
+};

@@ -1,0 +1,100 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb"],
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "plugins": ["react", "react-hooks", "prettier"],
+  "rules": {
+    "arrow-body-style": 0,
+    "arrow-parens": [2, "as-needed", { "requireForBlockBody": true }],
+    "arrow-spacing": 2,
+    "class-methods-use-this": [0],
+    "consistent-return": 0,
+    "camelcase": 0,
+    "func-names": [0],
+    "import/prefer-default-export": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/no-unresolved": 0,
+    "jsx-a11y/label-has-for": [1],
+    "jsx-a11y/no-static-element-interactions": [0],
+    "linebreak-style": 0,
+    "max-len": [
+      2,
+      160,
+      2,
+      {
+        "ignoreUrls": true,
+        "ignoreComments": false
+      }
+    ],
+    "newline-per-chained-call": [0],
+    "no-console": ["warn", { "allow": ["error"] }],
+    "no-else-return": 0,
+    "no-nested-ternary": 0,
+    "no-param-reassign": [2, { "props": false }],
+    "no-prototype-builtins": 0,
+    "no-return-assign": [0],
+    "no-underscore-dangle": [0],
+    "no-use-before-define": [0],
+    "no-useless-concat": [0],
+    "object-shorthand": [1],
+    "prefer-const": 0,
+    "react/prop-types": 1,
+    "react/prefer-stateless-function": 0,
+    "react/no-unescaped-entities": 1,
+    "react/no-array-index-key": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/jsx-no-bind": [
+      1,
+      {
+        "ignoreRefs": true,
+        "allowArrowFunctions": false,
+        "allowBind": false
+      }
+    ],
+    "react/jsx-closing-tag-location": [0],
+    "react/jsx-key": "error",
+    "react/jsx-curly-spacing": [
+      2,
+      "always",
+      {
+        "spacing": {
+          "objectLiterals": "never"
+        }
+      }
+    ],
+    "react/self-closing-comp": [0],
+    "react/no-unused-prop-types": [0],
+    "react/jsx-filename-extension": [0],
+    "react/no-find-dom-node": [1],
+    "react/no-string-refs": [1],
+    "react/forbid-prop-types": [0],
+    "react/require-default-props": [0],
+    "react/destructuring-assignment": [0],
+    "react/jsx-max-props-per-line": [1, { "maximum": 1 }],
+    "react/sort-comp": [
+      2,
+      {
+        "order": [
+          "propTypes",
+          "constructor",
+          "lifecycle",
+          "componentDidCatch",
+          "/^build.+$/",
+          "/^on.+$/",
+          "/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/",
+          "render",
+          "/^render.+$/",
+          "everything-else"
+        ]
+      }
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "space-before-function-paren": [2, "always"]
+  },
+  "globals": {
+    "window": true
+  }
+}
