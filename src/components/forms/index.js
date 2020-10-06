@@ -1,1 +1,1 @@
-export * from './Required';
+export * from './Label';
