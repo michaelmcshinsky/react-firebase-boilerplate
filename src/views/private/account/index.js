@@ -20,6 +20,8 @@ export default function Account () {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log('state', state)
+
   function _getUser () {
     let appUser = JSON.parse(localStorage.getItem('appUser'));
     if (appUser) {
@@ -29,7 +31,7 @@ export default function Account () {
         .doc(auth.uid)
         .get()
         .then((doc) => {
-          let user = { type: 'set', payload: { id: doc.id, ...doc.data() } };
+          let user = { uid: doc.id, ...doc.data() };
 
           setState(user);
           _updateStorage(user);
