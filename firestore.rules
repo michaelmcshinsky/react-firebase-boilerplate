@@ -1,29 +1,40 @@
 service cloud.firestore {
   match /databases/{database}/documents {
+    
+    function getRole(role) {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
+    }
+    
+    function getKey(rsc, key) {
+    	return rsc.data[key];
+    }
+
     function isSignedIn() {
       return request.auth != null;
     }
     
-    function getRole(rsc) {
-      return rsc.data.roles[request.auth.uid];
-    }
-    
-    function isOneOfRoles(rsc, array) {
-      return isSignedIn() && (getRole(rsc) in array);
+    function isOneOfRoles(array) {
+      return isSignedIn() && (getRole(role) in array);
     }
     
     function isOwner() {
-    	return isSignedIn && request.auth.uid == request.resource.data.uid;
-    }
-  
-  	match /users/{user} {
-    	allow write: if isOneOfRoles(resource, ['admin']) || isOwner();
-    	allow read: if isOneOfRoles(resource, ['admin', 'editor', 'employee', 'user']);
-      allow create, delete: if isOneOfRoles(resource, ['admin']);
+    	return isSignedIn() && request.auth.uid == request.resource.data.uid;
     }
     
     match /{document=**} {
-      allow read, write: if request.auth.uid != null;
+      allow read, write: if false;
+      
+      match /users/{user} {
+        allow write: if getRole('admin') == true;
+        allow read: if getRole('admin') == true || isOwner();
+        allow create, delete: if isOneOfRoles(['admin']);
+      }
+      
+    	match /posts/{post} {
+        allow write: if getRole('admin') == true || isOwner();
+        allow read: if isOwner() || getKey(resource, 'public') == true;
+        allow create, delete: if isOneOfRoles(resource, ['admin']) || isOwner();
+      } 
     }
   }
 }
