@@ -21,6 +21,7 @@ export default function Products () {
   function getCollection () {
     firestore
       .collection(config.collection)
+      .where('public', '==', true)
       .get()
       .then((queryShapshot) => {
         parseData(queryShapshot.docs);

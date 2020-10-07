@@ -21,6 +21,7 @@ export default function Posts () {
   function getCollection () {
     firestore
       .collection(config.collection)
+      .where('status', '==', 'published')
       .get()
       .then((queryShapshot) => {
         parseData(queryShapshot.docs);
