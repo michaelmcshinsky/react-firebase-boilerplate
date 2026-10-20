@@ -1,3 +1,7 @@
+> **Archived**
+>
+> This repository is no longer maintained. It is kept for historical reference.
+
 # React Firebase Boilerplate
 
 Author: [Michael McShinsky](https://github.com/mmcshinsky) - [Linkedin](https://www.linkedin.com/in/michaelmcshinsky) | [Twitter](https://twitter.com/mikemcshinsky) | [Website](http://mcshinsky.net/)
