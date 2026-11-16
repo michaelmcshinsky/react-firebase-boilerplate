@@ -22,7 +22,8 @@
     "e2e": "playwright test",
     "emulators": "firebase emulators:start",
     "seed": "tsx scripts/seed.ts",
-    "deploy": "npm run build && firebase deploy"
+    "deploy": "npm run build && firebase deploy",
+    "grant:admin": "tsx scripts/grant-admin.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^7.0.6",

@@ -9,6 +9,7 @@
 ## What's Included
 
 ### Authentication
+
 - Email/password registration and sign-in
 - Google OAuth provider
 - Password reset flow
@@ -17,6 +18,7 @@
 - Protected routes with loading states
 
 ### Authorization (RBAC)
+
 - Custom claims: `admin`, `editor`, `user`
 - Claims enforced in Firestore rules (source of truth)
 - Mirrored to user profiles for UI display
@@ -24,6 +26,7 @@
 - Component-level helpers (`hasRole`, `can`, `canManageContent`)
 
 ### Admin Dashboard
+
 - Responsive shell with collapsible sidebar
 - Light/dark/system theme with persistence
 - Sortable, filterable, paginated data tables (TanStack Table)
@@ -32,12 +35,14 @@
 - Empty, loading, and error states
 
 ### Data Layer
+
 - Typed Firestore converters (timestamps → `Date`)
 - Streaming hooks: `useCollection`, `useDocument`
 - Service modules own all writes (`services/posts.ts`, `services/products.ts`, `services/users.ts`)
 - Optimistic UI updates
 
 ### Firebase
+
 - Modular SDK initialization with emulator support
 - Firestore security rules (least privilege)
 - Storage rules (avatar uploads)
@@ -46,6 +51,7 @@
 - Emulator-ready seed script (`npm run emulators && npm run seed`)
 
 ### Quality Gates
+
 - Strict TypeScript (`verbatimModuleSyntax`, `erasableSyntaxOnly`)
 - ESLint + Prettier with Tailwind plugin
 - Vitest + Testing Library (unit)
@@ -70,17 +76,17 @@ Open http://localhost:3000. The landing page explains the stack and links to the
 
 ## Environment Variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `VITE_FIREBASE_API_KEY` | Yes | Firebase web API key |
-| `VITE_FIREBASE_AUTH_DOMAIN` | Yes | `your-project.firebaseapp.com` |
-| `VITE_FIREBASE_PROJECT_ID` | Yes | Firebase project ID |
-| `VITE_FIREBASE_STORAGE_BUCKET` | Yes | `your-project.appspot.com` |
-| `VITE_FIREBASE_MESSAGING_SENDER_ID` | Yes | Sender ID from console |
-| `VITE_FIREBASE_APP_ID` | Yes | Web app ID from console |
-| `VITE_FIREBASE_MEASUREMENT_ID` | No | Analytics ID |
-| `VITE_USE_EMULATORS` | No | Set `true` to point at local emulators |
-| `VITE_APP_NAME` | No | App name shown in sidebar (default: "Northstar") |
+| Variable                            | Required | Description                                      |
+| ----------------------------------- | -------- | ------------------------------------------------ |
+| `VITE_FIREBASE_API_KEY`             | Yes      | Firebase web API key                             |
+| `VITE_FIREBASE_AUTH_DOMAIN`         | Yes      | `your-project.firebaseapp.com`                   |
+| `VITE_FIREBASE_PROJECT_ID`          | Yes      | Firebase project ID                              |
+| `VITE_FIREBASE_STORAGE_BUCKET`      | Yes      | `your-project.appspot.com`                       |
+| `VITE_FIREBASE_MESSAGING_SENDER_ID` | Yes      | Sender ID from console                           |
+| `VITE_FIREBASE_APP_ID`              | Yes      | Web app ID from console                          |
+| `VITE_FIREBASE_MEASUREMENT_ID`      | No       | Analytics ID                                     |
+| `VITE_USE_EMULATORS`                | No       | Set `true` to point at local emulators           |
+| `VITE_APP_NAME`                     | No       | App name shown in sidebar (default: "Northstar") |
 
 ---
 
@@ -100,6 +106,13 @@ Open http://localhost:3000. The landing page explains the stack and links to the
    cd functions && npm install && cd ..
    firebase deploy --only functions
    ```
+8. **Promote your account to admin** (new accounts start as `user`):
+   ```bash
+   gcloud auth application-default login
+   FIREBASE_PROJECT_ID=your-project npm run grant:admin -- you@company.com
+   ```
+
+Full walkthrough: [`docs/firebase-setup.md`](docs/firebase-setup.md).
 
 ---
 
@@ -117,6 +130,7 @@ npm run dev
 ```
 
 The seed script creates:
+
 - `admin@example.com` (admin)
 - `editor@example.com` (editor)
 - `member@example.com` (user)
@@ -133,9 +147,10 @@ react-firebase-boilerplate/
 │       ├── admin.ts           # Admin SDK init, role types
 │       ├── auth-triggers.ts   # onCreate/onDelete profile sync
 │       ├── admin-functions.ts # setUserRoles, deleteUser
-│       ├── seed.ts            # HTTP callable seed endpoint
+│       ├── seed.ts            # HTTP seed endpoint
 │       └── index.ts           # Exports
-├── public/                    # Static assets
+├── docs/                      # Architecture + Firebase setup guides
+├── public/                    # Static assets, Netlify _redirects/_headers
 ├── src/
 │   ├── app/
 │   │   ├── config/env.ts      # Env validation + constants
@@ -168,7 +183,8 @@ react-firebase-boilerplate/
 │   ├── main.tsx               # App entry
 │   └── test/setup.ts          # Vitest setup
 ├── e2e/                       # Playwright smoke tests
-├── scripts/seed.ts            # Emulator seed script (tsx)
+├── scripts/                   # Emulator seed + grant-admin (tsx)
+├── netlify.toml               # Netlify build + SPA fallback
 ├── firebase.json              # Hosting, Functions, Emulators, Rules
 ├── firestore.rules            # Security rules
 ├── firestore.indexes.json     # Composite indexes
@@ -180,22 +196,23 @@ react-firebase-boilerplate/
 
 ## Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start Vite dev server |
-| `npm run build` | Typecheck + production build |
-| `npm run preview` | Preview production build |
-| `npm run typecheck` | TypeScript build (no emit) |
-| `npm run lint` | ESLint with zero warnings |
-| `npm run format` | Prettier write |
-| `npm run format:check` | Prettier check |
-| `npm run test` | Vitest watch mode |
-| `npm run test:run` | Vitest single run |
-| `npm run test:coverage` | Vitest with coverage report |
-| `npm run e2e` | Playwright tests |
-| `npm run emulators` | Firebase Emulator Suite |
-| `npm run seed` | Seed emulator with demo data |
-| `npm run deploy` | Build + `firebase deploy` |
+| Command                                 | Description                            |
+| --------------------------------------- | -------------------------------------- |
+| `npm run dev`                           | Start Vite dev server                  |
+| `npm run build`                         | Typecheck + production build           |
+| `npm run preview`                       | Preview production build               |
+| `npm run typecheck`                     | TypeScript build (no emit)             |
+| `npm run lint`                          | ESLint with zero warnings              |
+| `npm run format`                        | Prettier write                         |
+| `npm run format:check`                  | Prettier check                         |
+| `npm run test`                          | Vitest watch mode                      |
+| `npm run test:run`                      | Vitest single run                      |
+| `npm run test:coverage`                 | Vitest with coverage report            |
+| `npm run e2e`                           | Playwright tests                       |
+| `npm run emulators`                     | Firebase Emulator Suite                |
+| `npm run seed`                          | Seed emulator with demo data           |
+| `npm run grant:admin -- <email> [role]` | Write custom claims with the Admin SDK |
+| `npm run deploy`                        | Build + `firebase deploy`              |
 
 ---
 
