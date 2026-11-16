@@ -28,7 +28,7 @@ export function ConfigurationRequired() {
       <div className="space-y-4">
         <Logo />
         <div className="space-y-2">
-          <p className="text-primary text-xs font-semibold tracking-widest uppercase">
+          <p className="text-xs font-semibold tracking-widest text-primary uppercase">
             One step left
           </p>
           <h1 className="text-3xl font-semibold tracking-tight">Connect your Firebase project</h1>
@@ -41,22 +41,19 @@ export function ConfigurationRequired() {
 
       <div className="space-y-3">
         {STEPS.map((step) => (
-          <div
-            key={step.title}
-            className="bg-card flex gap-4 rounded-xl border p-4 shadow-sm"
-          >
-            <div className="bg-primary/10 text-primary flex size-9 shrink-0 items-center justify-center rounded-lg">
+          <div key={step.title} className="flex gap-4 rounded-xl border bg-card p-4 shadow-sm">
+            <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
               <step.icon className="size-4" />
             </div>
             <div className="space-y-1">
               <p className="text-sm font-medium">{step.title}</p>
-              <p className="text-muted-foreground text-sm">{step.body}</p>
+              <p className="text-sm text-muted-foreground">{step.body}</p>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="bg-muted/60 rounded-xl border p-4 font-mono text-xs leading-relaxed">
+      <div className="rounded-xl border bg-muted/60 p-4 font-mono text-xs leading-relaxed">
         <p className="text-muted-foreground"># .env</p>
         <p>VITE_FIREBASE_API_KEY=…</p>
         <p>VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com</p>

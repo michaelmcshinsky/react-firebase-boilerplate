@@ -52,7 +52,7 @@ export function UserMenu() {
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col gap-0.5">
             <span className="truncate text-sm font-medium">{displayName}</span>
-            <span className="text-muted-foreground truncate text-xs">
+            <span className="truncate text-xs text-muted-foreground">
               {profile?.email ?? user?.email}
             </span>
           </div>

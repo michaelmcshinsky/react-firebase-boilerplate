@@ -97,11 +97,11 @@ export function DashboardPage() {
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div className="space-y-1.5">
-          <p className="text-primary text-xs font-semibold tracking-widest uppercase">Overview</p>
+          <p className="text-xs font-semibold tracking-widest text-primary uppercase">Overview</p>
           <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
             Good to see you, {displayName.split(' ')[0]}
           </h1>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-sm text-muted-foreground">
             {isAdmin
               ? 'You have full access to members, content and settings.'
               : isStaff
@@ -177,11 +177,11 @@ export function DashboardPage() {
                 ))}
               </div>
             ) : posts.error ? (
-              <p className="text-destructive text-sm">{posts.error}</p>
+              <p className="text-sm text-destructive">{posts.error}</p>
             ) : posts.data.length === 0 ? (
               <div className="flex flex-col items-start gap-2 rounded-lg border border-dashed px-4 py-8">
                 <p className="text-sm font-medium">No posts yet</p>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-sm text-muted-foreground">
                   Create a draft to see the table, dialogs and toasts in action.
                 </p>
                 <Button size="sm" variant="outline" asChild>
@@ -192,12 +192,12 @@ export function DashboardPage() {
               <ul className="-mx-2 divide-y">
                 {posts.data.slice(0, 5).map((post) => (
                   <li key={post.id} className="flex items-center gap-3 px-2 py-2.5">
-                    <span className="bg-muted flex size-8 shrink-0 items-center justify-center rounded-lg">
-                      <FileText className="text-muted-foreground size-3.5" />
+                    <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted">
+                      <FileText className="size-3.5 text-muted-foreground" />
                     </span>
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-sm font-medium">{post.title}</p>
-                      <p className="text-muted-foreground truncate text-xs">
+                      <p className="truncate text-xs text-muted-foreground">
                         {post.authorName || 'Unknown author'} · {formatRelative(post.updatedAt)}
                       </p>
                     </div>
@@ -216,7 +216,7 @@ export function DashboardPage() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>Getting started</CardTitle>
-                <span className="text-muted-foreground text-xs">
+                <span className="text-xs text-muted-foreground">
                   {completed}/{checklist.length}
                 </span>
               </div>
@@ -227,18 +227,23 @@ export function DashboardPage() {
                 <Link
                   key={item.label}
                   to={item.to}
-                  className="hover:bg-muted/50 -mx-2 flex items-start gap-2.5 rounded-lg px-2 py-1.5 transition-colors"
+                  className="-mx-2 flex items-start gap-2.5 rounded-lg px-2 py-1.5 transition-colors hover:bg-muted/50"
                 >
                   {item.done ? (
-                    <CheckCircle2 className="text-success mt-0.5 size-4 shrink-0" />
+                    <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-success" />
                   ) : (
-                    <Circle className="text-muted-foreground/50 mt-0.5 size-4 shrink-0" />
+                    <Circle className="mt-0.5 size-4 shrink-0 text-muted-foreground/50" />
                   )}
                   <span className="min-w-0">
-                    <span className={cn('block text-sm font-medium', item.done && 'line-through opacity-60')}>
+                    <span
+                      className={cn(
+                        'block text-sm font-medium',
+                        item.done && 'line-through opacity-60',
+                      )}
+                    >
                       {item.label}
                     </span>
-                    <span className="text-muted-foreground block text-xs">{item.description}</span>
+                    <span className="block text-xs text-muted-foreground">{item.description}</span>
                   </span>
                 </Link>
               ))}
@@ -252,17 +257,17 @@ export function DashboardPage() {
             </CardHeader>
             <CardContent>
               {activity.length === 0 ? (
-                <p className="text-muted-foreground text-sm">Nothing has changed yet.</p>
+                <p className="text-sm text-muted-foreground">Nothing has changed yet.</p>
               ) : (
                 <ul className="space-y-3">
                   {activity.map((item) => (
                     <li key={item.id} className="flex items-start gap-2.5">
-                      <span className="bg-muted mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-md">
-                        <item.icon className="text-muted-foreground size-3" />
+                      <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-md bg-muted">
+                        <item.icon className="size-3 text-muted-foreground" />
                       </span>
                       <div className="min-w-0">
                         <p className="truncate text-sm">{item.label}</p>
-                        <p className="text-muted-foreground text-xs">
+                        <p className="text-xs text-muted-foreground">
                           {item.meta} · {formatRelative(item.date)}
                         </p>
                       </div>
@@ -275,13 +280,13 @@ export function DashboardPage() {
         </div>
       </div>
 
-      <div className="from-primary/10 via-primary/5 border-primary/20 flex flex-col gap-3 rounded-xl border bg-gradient-to-r to-transparent p-5 sm:flex-row sm:items-center">
-        <div className="bg-primary/15 text-primary flex size-9 shrink-0 items-center justify-center rounded-lg">
+      <div className="flex flex-col gap-3 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent p-5 sm:flex-row sm:items-center">
+        <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
           <Sparkles className="size-4" />
         </div>
         <div className="flex-1">
           <p className="text-sm font-medium">Everything on this page is a pattern to copy</p>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-sm text-muted-foreground">
             Live collections, role-gated UI, skeleton and empty states, and a responsive shell.
           </p>
         </div>
@@ -316,10 +321,10 @@ function StatCard({
     <Card className="gap-0 py-4">
       <CardContent className="space-y-3 px-4">
         <div className="flex items-center justify-between">
-          <span className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
+          <span className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
             {label}
           </span>
-          <Icon className="text-muted-foreground/70 size-4" />
+          <Icon className="size-4 text-muted-foreground/70" />
         </div>
         {value === null ? (
           <Skeleton className="h-7 w-16" />
@@ -332,7 +337,7 @@ function StatCard({
         ) : (
           <p className="text-2xl font-semibold tracking-tight">{value}</p>
         )}
-        <p className="text-muted-foreground truncate text-xs">{detail}</p>
+        <p className="truncate text-xs text-muted-foreground">{detail}</p>
       </CardContent>
     </Card>
   )

@@ -53,16 +53,16 @@ export function ForgotPasswordPage() {
       }
     >
       {sentTo ? (
-        <div className="bg-card flex flex-col items-center gap-3 rounded-xl border px-6 py-8 text-center">
-          <div className="bg-success/15 text-success flex size-11 items-center justify-center rounded-full">
+        <div className="flex flex-col items-center gap-3 rounded-xl border bg-card px-6 py-8 text-center">
+          <div className="flex size-11 items-center justify-center rounded-full bg-success/15 text-success">
             <MailCheck className="size-5" />
           </div>
           <p className="text-sm font-medium">Reset email sent</p>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-sm text-muted-foreground">
             Didn’t get it? Check spam, or{' '}
             <button
               type="button"
-              className="text-foreground font-medium hover:underline"
+              className="font-medium text-foreground hover:underline"
               onClick={() => setSentTo(null)}
             >
               try another address

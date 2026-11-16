@@ -90,13 +90,18 @@ export function ProductFormDialog({ open, onOpenChange, product }: ProductFormDi
           {formError ? (
             <div
               role="alert"
-              className="bg-destructive/8 text-destructive border-destructive/25 rounded-lg border px-3 py-2 text-sm"
+              className="rounded-lg border border-destructive/25 bg-destructive/8 px-3 py-2 text-sm text-destructive"
             >
               {formError}
             </div>
           ) : null}
 
-          <FormField label="Name" htmlFor="name" error={form.formState.errors.name?.message} required>
+          <FormField
+            label="Name"
+            htmlFor="name"
+            error={form.formState.errors.name?.message}
+            required
+          >
             <Input
               id="name"
               placeholder="Studio licence"
@@ -106,7 +111,12 @@ export function ProductFormDialog({ open, onOpenChange, product }: ProductFormDi
           </FormField>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <FormField label="SKU" htmlFor="sku" error={form.formState.errors.sku?.message} required>
+            <FormField
+              label="SKU"
+              htmlFor="sku"
+              error={form.formState.errors.sku?.message}
+              required
+            >
               <Input
                 id="sku"
                 placeholder="STUDIO-01"

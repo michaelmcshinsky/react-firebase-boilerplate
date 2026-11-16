@@ -120,7 +120,7 @@
   }
 
   body {
-    @apply bg-background text-foreground h-full font-sans;
+    @apply h-full bg-background font-sans text-foreground;
     font-feature-settings: 'cv11', 'ss01';
     font-variation-settings: 'opsz' 32;
   }
@@ -130,7 +130,7 @@
   }
 
   :focus-visible {
-    @apply outline-ring/70 outline-2 outline-offset-2;
+    @apply outline-2 outline-offset-2 outline-ring/70;
   }
 
   ::-webkit-scrollbar {
@@ -139,7 +139,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-border rounded-full border-2 border-transparent bg-clip-content;
+    @apply rounded-full border-2 border-transparent bg-border bg-clip-content;
   }
 }
 
@@ -168,7 +168,7 @@
   }
 
   .text-gradient {
-    @apply from-primary via-primary to-foreground bg-gradient-to-br bg-clip-text text-transparent;
+    @apply bg-gradient-to-br from-primary via-primary to-foreground bg-clip-text text-transparent;
   }
 
   .shadow-soft {

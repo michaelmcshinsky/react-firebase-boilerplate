@@ -74,7 +74,7 @@ export function ProductsPage() {
       cell: ({ row }) => (
         <div className="min-w-0">
           <p className="truncate font-medium">{row.original.name}</p>
-          <p className="text-muted-foreground font-mono text-xs">{row.original.sku}</p>
+          <p className="font-mono text-xs text-muted-foreground">{row.original.sku}</p>
         </div>
       ),
     },
@@ -96,7 +96,9 @@ export function ProductsPage() {
       accessorKey: 'updatedAt',
       header: ({ column }) => <SortableHeader column={column}>Updated</SortableHeader>,
       cell: ({ row }) => (
-        <span className="text-muted-foreground text-sm">{formatRelative(row.original.updatedAt)}</span>
+        <span className="text-sm text-muted-foreground">
+          {formatRelative(row.original.updatedAt)}
+        </span>
       ),
     },
     {
@@ -167,7 +169,10 @@ export function ProductsPage() {
           </Button>
         }
         filters={
-          <Select value={visibility} onValueChange={(value) => setVisibility(value as VisibilityFilter)}>
+          <Select
+            value={visibility}
+            onValueChange={(value) => setVisibility(value as VisibilityFilter)}
+          >
             <SelectTrigger size="sm" className="w-[150px]">
               <SelectValue />
             </SelectTrigger>
@@ -190,7 +195,7 @@ export function ProductsPage() {
         title="Delete product?"
         description={
           <>
-            <span className="text-foreground font-medium">{deleting?.name}</span> will be removed
+            <span className="font-medium text-foreground">{deleting?.name}</span> will be removed
             permanently. This cannot be undone.
           </>
         }

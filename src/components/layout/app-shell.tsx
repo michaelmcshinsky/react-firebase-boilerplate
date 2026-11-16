@@ -40,13 +40,13 @@ export function AppShell() {
   }
 
   return (
-    <div className="bg-muted/25 min-h-screen">
-      <aside className="bg-sidebar fixed inset-y-0 left-0 hidden w-64 border-r lg:block">
+    <div className="min-h-screen bg-muted/25">
+      <aside className="fixed inset-y-0 left-0 hidden w-64 border-r bg-sidebar lg:block">
         <SidebarNav />
       </aside>
 
       <div className="flex min-h-screen flex-col lg:pl-64">
-        <header className="bg-background/85 supports-[backdrop-filter]:bg-background/70 sticky top-0 z-30 flex h-14 items-center gap-2 border-b px-4 backdrop-blur-md sm:px-6">
+        <header className="sticky top-0 z-30 flex h-14 items-center gap-2 border-b bg-background/85 px-4 backdrop-blur-md supports-[backdrop-filter]:bg-background/70 sm:px-6">
           <Button
             variant="ghost"
             size="icon"
@@ -66,9 +66,7 @@ export function AppShell() {
             <PanelLeft className="size-4" />
             <span>Workspace</span>
             <span className="text-border">/</span>
-            <span className="text-foreground font-medium">
-              {titleForPath(location.pathname)}
-            </span>
+            <span className="font-medium text-foreground">{titleForPath(location.pathname)}</span>
           </div>
 
           <div className="ml-auto flex items-center gap-1">
@@ -83,13 +81,13 @@ export function AppShell() {
         <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
           <div className="mx-auto w-full max-w-6xl space-y-6">
             {error ? (
-              <div className="border-destructive/30 bg-destructive/8 text-destructive rounded-xl border px-4 py-3 text-sm">
+              <div className="rounded-xl border border-destructive/30 bg-destructive/8 px-4 py-3 text-sm text-destructive">
                 {error}
               </div>
             ) : null}
 
             {user && !emailVerified ? (
-              <div className="border-warning/40 bg-warning/10 flex flex-col gap-3 rounded-xl border px-4 py-3 text-sm sm:flex-row sm:items-center">
+              <div className="flex flex-col gap-3 rounded-xl border border-warning/40 bg-warning/10 px-4 py-3 text-sm sm:flex-row sm:items-center">
                 <MailWarning className="size-4 shrink-0" />
                 <p className="flex-1">
                   Verify <span className="font-medium">{user.email}</span> to unlock account

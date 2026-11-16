@@ -27,10 +27,7 @@ export const setUserRoles = onCall({ region: REGION }, async (request) => {
   }
 
   if (!isRoleArray(data.roles)) {
-    throw new HttpsError(
-      'invalid-argument',
-      'Provide at least one role from: admin, editor, user.',
-    )
+    throw new HttpsError('invalid-argument', 'Provide at least one role from: admin, editor, user.')
   }
 
   const roles = [...new Set(data.roles)]
@@ -44,10 +41,9 @@ export const setUserRoles = onCall({ region: REGION }, async (request) => {
   }
 
   await auth.setCustomUserClaims(uid, { roles })
-  await db.doc(`users/${uid}`).set(
-    { roles, updatedAt: FieldValue.serverTimestamp() },
-    { merge: true },
-  )
+  await db
+    .doc(`users/${uid}`)
+    .set({ roles, updatedAt: FieldValue.serverTimestamp() }, { merge: true })
 
   logger.info('Roles updated', { uid, roles, updatedBy: request.auth.uid })
 

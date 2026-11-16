@@ -128,17 +128,17 @@ function Hero() {
     <section className="relative overflow-hidden">
       <div
         aria-hidden
-        className="bg-grid absolute inset-0 -z-10 opacity-40 [mask-image:radial-gradient(ellipse_at_top,black,transparent_72%)]"
+        className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black,transparent_72%)] opacity-40"
       />
       <div
         aria-hidden
-        className="bg-primary/15 pointer-events-none absolute -top-40 left-1/2 -z-10 h-[420px] w-[820px] -translate-x-1/2 rounded-full blur-3xl"
+        className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl"
       />
 
       <div className="mx-auto grid w-full max-w-6xl gap-14 px-4 py-16 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:py-24">
         <div className="animate-fade-up space-y-7">
           <Badge variant="outline" className="gap-1.5 rounded-full px-3 py-1 text-xs">
-            <Sparkles className="text-primary size-3" />
+            <Sparkles className="size-3 text-primary" />
             v2.0 — rebuilt on React 19 and the modular Firebase SDK
           </Badge>
 
@@ -148,7 +148,7 @@ function Hero() {
               <br />
               not the <span className="text-gradient">auth plumbing</span>.
             </h1>
-            <p className="text-muted-foreground max-w-xl text-base leading-relaxed sm:text-lg">
+            <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
               A production-minded React + Firebase starter with authentication, role-based access,
               typed Firestore CRUD and an admin dashboard that already looks like a finished
               product.
@@ -176,10 +176,10 @@ function Hero() {
             </Button>
           </div>
 
-          <ul className="text-muted-foreground flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
             {HERO_POINTS.map((point) => (
               <li key={point} className="flex items-center gap-1.5">
-                <Check className="text-success size-4" />
+                <Check className="size-4 text-success" />
                 {point}
               </li>
             ))}
@@ -200,25 +200,25 @@ function AppPreview() {
   ]
 
   return (
-    <div className="relative animate-fade-up lg:pl-6 [animation-delay:120ms]">
+    <div className="animate-fade-up relative [animation-delay:120ms] lg:pl-6">
       <div
         aria-hidden
-        className="from-primary/25 via-primary/10 absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-tr to-transparent blur-2xl"
+        className="absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-tr from-primary/25 via-primary/10 to-transparent blur-2xl"
       />
-      <div className="bg-card shadow-soft overflow-hidden rounded-2xl border">
-        <div className="bg-muted/50 flex items-center gap-1.5 border-b px-4 py-2.5">
-          <span className="bg-destructive/60 size-2 rounded-full" />
-          <span className="bg-warning/70 size-2 rounded-full" />
-          <span className="bg-success/70 size-2 rounded-full" />
-          <span className="text-muted-foreground ml-2 truncate text-[11px]">
+      <div className="shadow-soft overflow-hidden rounded-2xl border bg-card">
+        <div className="flex items-center gap-1.5 border-b bg-muted/50 px-4 py-2.5">
+          <span className="size-2 rounded-full bg-destructive/60" />
+          <span className="size-2 rounded-full bg-warning/70" />
+          <span className="size-2 rounded-full bg-success/70" />
+          <span className="ml-2 truncate text-[11px] text-muted-foreground">
             app.yourproject.com/dashboard
           </span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-[116px_1fr]">
-          <div className="bg-sidebar hidden flex-col gap-1 border-r p-3 sm:flex">
+          <div className="hidden flex-col gap-1 border-r bg-sidebar p-3 sm:flex">
             <div className="mb-3 flex items-center gap-2">
-              <span className="from-primary to-primary/70 flex size-5 items-center justify-center rounded-md bg-gradient-to-br text-white">
+              <span className="flex size-5 items-center justify-center rounded-md bg-gradient-to-br from-primary to-primary/70 text-white">
                 <Sparkles className="size-3" />
               </span>
               <span className="text-[11px] font-semibold">Northstar</span>
@@ -229,7 +229,7 @@ function AppPreview() {
                 className={cn(
                   'flex items-center gap-1.5 rounded-md px-2 py-1.5 text-[10px]',
                   index === 0
-                    ? 'bg-sidebar-accent text-sidebar-accent-foreground font-medium'
+                    ? 'bg-sidebar-accent font-medium text-sidebar-accent-foreground'
                     : 'text-muted-foreground',
                 )}
               >
@@ -247,7 +247,7 @@ function AppPreview() {
           <div className="space-y-3 p-4">
             <div className="flex items-start justify-between gap-2">
               <div>
-                <p className="text-muted-foreground text-[9px] font-semibold tracking-widest uppercase">
+                <p className="text-[9px] font-semibold tracking-widest text-muted-foreground uppercase">
                   Dashboard
                 </p>
                 <p className="text-sm font-semibold tracking-tight">Good morning, Mike</p>
@@ -263,17 +263,19 @@ function AppPreview() {
                 { label: 'Products', value: '12' },
                 { label: 'Members', value: '8' },
               ].map((stat) => (
-                <div key={stat.label} className="bg-muted/40 rounded-lg border p-2.5">
-                  <p className="text-muted-foreground text-[9px]">{stat.label}</p>
+                <div key={stat.label} className="rounded-lg border bg-muted/40 p-2.5">
+                  <p className="text-[9px] text-muted-foreground">{stat.label}</p>
                   <p className="text-base font-semibold tracking-tight">{stat.value}</p>
                 </div>
               ))}
             </div>
 
             <div className="overflow-hidden rounded-lg border">
-              <div className="bg-muted/40 flex items-center justify-between border-b px-2.5 py-1.5">
-                <span className="text-[9px] font-medium tracking-wider uppercase">Recent posts</span>
-                <span className="text-muted-foreground text-[9px]">Updated</span>
+              <div className="flex items-center justify-between border-b bg-muted/40 px-2.5 py-1.5">
+                <span className="text-[9px] font-medium tracking-wider uppercase">
+                  Recent posts
+                </span>
+                <span className="text-[9px] text-muted-foreground">Updated</span>
               </div>
               {rows.map((row) => (
                 <div
@@ -281,8 +283,8 @@ function AppPreview() {
                   className="flex items-center justify-between gap-2 border-b px-2.5 py-2 last:border-0"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="bg-primary/10 flex size-4 items-center justify-center rounded">
-                      <span className="bg-primary size-1.5 rounded-full" />
+                    <span className="flex size-4 items-center justify-center rounded bg-primary/10">
+                      <span className="size-1.5 rounded-full bg-primary" />
                     </span>
                     <span className="text-[10px] font-medium">{row.title}</span>
                   </div>
@@ -296,13 +298,13 @@ function AppPreview() {
         </div>
       </div>
 
-      <div className="bg-card shadow-soft absolute -bottom-4 -left-2 flex items-center gap-2 rounded-xl border px-3 py-2 text-[11px] sm:-left-6">
-        <span className="bg-success/15 text-success flex size-5 items-center justify-center rounded-full">
+      <div className="shadow-soft absolute -bottom-4 -left-2 flex items-center gap-2 rounded-xl border bg-card px-3 py-2 text-[11px] sm:-left-6">
+        <span className="flex size-5 items-center justify-center rounded-full bg-success/15 text-success">
           <ShieldCheck className="size-3" />
         </span>
         <div>
           <p className="font-medium">Custom claims verified</p>
-          <p className="text-muted-foreground text-[10px]">admin · editor · member</p>
+          <p className="text-[10px] text-muted-foreground">admin · editor · member</p>
         </div>
       </div>
     </div>
@@ -314,7 +316,7 @@ function FeatureGrid() {
     <section id="features" className="border-t">
       <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
         <div className="max-w-2xl space-y-3">
-          <p className="text-primary text-xs font-semibold tracking-widest uppercase">Included</p>
+          <p className="text-xs font-semibold tracking-widest text-primary uppercase">Included</p>
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
             The boring parts, already built
           </h2>
@@ -328,13 +330,13 @@ function FeatureGrid() {
           {FEATURES.map((feature) => (
             <div
               key={feature.title}
-              className="bg-card group hover:border-primary/30 rounded-xl border p-5 transition-colors"
+              className="group rounded-xl border bg-card p-5 transition-colors hover:border-primary/30"
             >
-              <div className="bg-primary/10 text-primary mb-4 flex size-9 items-center justify-center rounded-lg">
+              <div className="mb-4 flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <feature.icon className="size-4" />
               </div>
               <h3 className="text-sm font-semibold">{feature.title}</h3>
-              <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">{feature.body}</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{feature.body}</p>
             </div>
           ))}
         </div>
@@ -345,16 +347,18 @@ function FeatureGrid() {
 
 function DeveloperExperience() {
   return (
-    <section className="bg-muted/30 border-y">
+    <section className="border-y bg-muted/30">
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-20">
         <div className="space-y-5">
-          <p className="text-primary text-xs font-semibold tracking-widest uppercase">Architecture</p>
+          <p className="text-xs font-semibold tracking-widest text-primary uppercase">
+            Architecture
+          </p>
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
             Feature folders, one obvious place for every change
           </h2>
           <p className="text-muted-foreground">
-            Firebase setup lives in <code className="text-foreground text-xs">lib/firebase</code>,
-            writes live in <code className="text-foreground text-xs">services</code>, and each
+            Firebase setup lives in <code className="text-xs text-foreground">lib/firebase</code>,
+            writes live in <code className="text-xs text-foreground">services</code>, and each
             feature owns its page, table columns, form schema and mutations.
           </p>
 
@@ -366,7 +370,7 @@ function DeveloperExperience() {
               'Role gates at route level and component level',
             ].map((item) => (
               <li key={item} className="flex items-start gap-2.5">
-                <span className="bg-success/15 text-success mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full">
+                <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
                   <Check className="size-2.5" />
                 </span>
                 <span className="text-muted-foreground">{item}</span>
@@ -375,12 +379,12 @@ function DeveloperExperience() {
           </ul>
         </div>
 
-        <div className="bg-card overflow-hidden rounded-xl border shadow-sm">
+        <div className="overflow-hidden rounded-xl border bg-card shadow-sm">
           <div className="flex items-center justify-between border-b px-4 py-2.5">
-            <span className="text-muted-foreground font-mono text-xs">
+            <span className="font-mono text-xs text-muted-foreground">
               src/app/router/router.tsx
             </span>
-            <span className="text-muted-foreground text-[10px]">excerpt</span>
+            <span className="text-[10px] text-muted-foreground">excerpt</span>
           </div>
           <pre className="overflow-x-auto p-4 font-mono text-[12px] leading-relaxed">
             <code>{`{/* admin-only route */}
@@ -393,8 +397,8 @@ function DeveloperExperience() {
   ),
 }`}</code>
           </pre>
-          <div className="bg-muted/40 flex items-center gap-2 border-t px-4 py-2.5 text-[11px]">
-            <Lock className="text-muted-foreground size-3" />
+          <div className="flex items-center gap-2 border-t bg-muted/40 px-4 py-2.5 text-[11px]">
+            <Lock className="size-3 text-muted-foreground" />
             <span className="text-muted-foreground">
               The same roles are checked again in Firestore rules.
             </span>
@@ -410,24 +414,24 @@ function StackSection() {
     <section id="stack">
       <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
         <div className="max-w-2xl space-y-3">
-          <p className="text-primary text-xs font-semibold tracking-widest uppercase">The stack</p>
+          <p className="text-xs font-semibold tracking-widest text-primary uppercase">The stack</p>
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
             Current, boring, and replaceable
           </h2>
           <p className="text-muted-foreground">
-            Every dependency earns its place. No Redux, no component library lock-in, no legacy
-            peer dependencies held together with patches.
+            Every dependency earns its place. No Redux, no component library lock-in, no legacy peer
+            dependencies held together with patches.
           </p>
         </div>
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {STACK.map((group) => (
-            <div key={group.label} className="bg-card rounded-xl border p-5">
+            <div key={group.label} className="rounded-xl border bg-card p-5">
               <p className="text-sm font-semibold">{group.label}</p>
               <ul className="mt-4 space-y-2.5">
                 {group.items.map((item) => (
-                  <li key={item} className="text-muted-foreground flex items-center gap-2 text-sm">
-                    <Check className="text-success size-3.5" />
+                  <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Check className="size-3.5 text-success" />
                     {item}
                   </li>
                 ))}
@@ -445,12 +449,14 @@ function QuickStart() {
     <section id="start" className="border-t">
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:py-20">
         <div className="space-y-5">
-          <p className="text-primary text-xs font-semibold tracking-widest uppercase">Quick start</p>
+          <p className="text-xs font-semibold tracking-widest text-primary uppercase">
+            Quick start
+          </p>
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
             Four commands to a running app
           </h2>
           <p className="text-muted-foreground">
-            Copy your Firebase web config into <code className="text-foreground text-xs">.env</code>
+            Copy your Firebase web config into <code className="text-xs text-foreground">.env</code>
             , start the dev server, and sign up. The first account is promoted with the seed script
             or the Firebase console.
           </p>
@@ -492,10 +498,15 @@ function CodeBlock({ code, className }: { code: string; className?: string }) {
   }
 
   return (
-    <div className={cn('bg-card overflow-hidden rounded-xl border shadow-sm', className)}>
+    <div className={cn('overflow-hidden rounded-xl border bg-card shadow-sm', className)}>
       <div className="flex items-center justify-between border-b px-4 py-2.5">
-        <span className="text-muted-foreground font-mono text-xs">terminal</span>
-        <Button variant="ghost" size="icon-sm" onClick={() => void copy()} aria-label="Copy commands">
+        <span className="font-mono text-xs text-muted-foreground">terminal</span>
+        <Button
+          variant="ghost"
+          size="icon-sm"
+          onClick={() => void copy()}
+          aria-label="Copy commands"
+        >
           {copied ? <CheckCheck className="size-4" /> : <Copy className="size-4" />}
         </Button>
       </div>
@@ -508,10 +519,10 @@ function CodeBlock({ code, className }: { code: string; className?: string }) {
 
 function Questions() {
   return (
-    <section id="faq" className="bg-muted/30 border-t">
+    <section id="faq" className="border-t bg-muted/30">
       <div className="mx-auto w-full max-w-4xl px-4 py-16 sm:px-6 lg:py-20">
         <div className="space-y-3">
-          <p className="text-primary text-xs font-semibold tracking-widest uppercase">FAQ</p>
+          <p className="text-xs font-semibold tracking-widest text-primary uppercase">FAQ</p>
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Questions, answered</h2>
         </div>
 
@@ -524,7 +535,7 @@ function Questions() {
                   +
                 </span>
               </summary>
-              <p className="text-muted-foreground mt-2 pr-8 text-sm leading-relaxed">
+              <p className="mt-2 pr-8 text-sm leading-relaxed text-muted-foreground">
                 {item.answer}
               </p>
             </details>
@@ -540,13 +551,13 @@ function FinalCta() {
     <section className="relative overflow-hidden border-t">
       <div
         aria-hidden
-        className="bg-primary/10 pointer-events-none absolute inset-x-0 -top-24 h-64 blur-3xl"
+        className="pointer-events-none absolute inset-x-0 -top-24 h-64 bg-primary/10 blur-3xl"
       />
       <div className="mx-auto flex w-full max-w-4xl flex-col items-center gap-5 px-4 py-20 text-center sm:px-6">
         <h2 className="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
           Start with the parts you would have written anyway
         </h2>
-        <p className="text-muted-foreground max-w-xl">
+        <p className="max-w-xl text-muted-foreground">
           Clone it, point it at a Firebase project, and spend your first day on the product instead
           of the login form.
         </p>

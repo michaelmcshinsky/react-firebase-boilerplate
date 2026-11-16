@@ -28,13 +28,7 @@ import { getErrorMessage } from '@/lib/errors'
 import { createPost, updatePost } from '@/services/posts'
 import type { Post } from '@/types'
 
-import {
-  emptyPostValues,
-  joinTags,
-  postFormSchema,
-  splitTags,
-  type PostFormValues,
-} from './schema'
+import { emptyPostValues, joinTags, postFormSchema, splitTags, type PostFormValues } from './schema'
 
 interface PostFormDialogProps {
   open: boolean
@@ -112,13 +106,18 @@ export function PostFormDialog({ open, onOpenChange, post }: PostFormDialogProps
           {formError ? (
             <div
               role="alert"
-              className="bg-destructive/8 text-destructive border-destructive/25 rounded-lg border px-3 py-2 text-sm"
+              className="rounded-lg border border-destructive/25 bg-destructive/8 px-3 py-2 text-sm text-destructive"
             >
               {formError}
             </div>
           ) : null}
 
-          <FormField label="Title" htmlFor="title" error={form.formState.errors.title?.message} required>
+          <FormField
+            label="Title"
+            htmlFor="title"
+            error={form.formState.errors.title?.message}
+            required
+          >
             <Input
               id="title"
               placeholder="How we ship on Fridays"
@@ -140,7 +139,12 @@ export function PostFormDialog({ open, onOpenChange, post }: PostFormDialogProps
             />
           </FormField>
 
-          <FormField label="Body" htmlFor="body" error={form.formState.errors.body?.message} required>
+          <FormField
+            label="Body"
+            htmlFor="body"
+            error={form.formState.errors.body?.message}
+            required
+          >
             <Textarea
               id="body"
               rows={7}

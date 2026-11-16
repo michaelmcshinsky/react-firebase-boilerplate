@@ -30,11 +30,7 @@ export async function signUp(input: {
   displayName: string
 }): Promise<User> {
   const { auth } = requireFirebase()
-  const credential = await createUserWithEmailAndPassword(
-    auth,
-    input.email.trim(),
-    input.password,
-  )
+  const credential = await createUserWithEmailAndPassword(auth, input.email.trim(), input.password)
   await updateProfile(credential.user, { displayName: input.displayName.trim() })
   return credential.user
 }

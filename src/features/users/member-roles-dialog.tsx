@@ -110,14 +110,14 @@ export function MemberRolesDialog({ member, open, onOpenChange }: MemberRolesDia
                 <span
                   className={cn(
                     'mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border',
-                    checked ? 'bg-primary border-primary text-primary-foreground' : 'border-input',
+                    checked ? 'border-primary bg-primary text-primary-foreground' : 'border-input',
                   )}
                 >
                   {checked ? <Check className="size-3" /> : null}
                 </span>
                 <span className="min-w-0">
                   <span className="block text-sm font-medium">{ROLE_META[role].label}</span>
-                  <span className="text-muted-foreground block text-xs">
+                  <span className="block text-xs text-muted-foreground">
                     {ROLE_META[role].description}
                   </span>
                 </span>
@@ -129,7 +129,7 @@ export function MemberRolesDialog({ member, open, onOpenChange }: MemberRolesDia
         {error ? (
           <div
             role="alert"
-            className="bg-destructive/8 text-destructive border-destructive/25 flex items-start gap-2 rounded-lg border px-3 py-2 text-sm"
+            className="flex items-start gap-2 rounded-lg border border-destructive/25 bg-destructive/8 px-3 py-2 text-sm text-destructive"
           >
             <AlertTriangle className="mt-0.5 size-4 shrink-0" />
             {error}

@@ -31,13 +31,19 @@ describe('getErrorMessage', () => {
 
   it('maps functions errors', () => {
     const error = new FirebaseError('functions/not-found', 'Function not found')
-    expect(getErrorMessage(error)).toBe('That Cloud Function is not deployed. Run firebase deploy --only functions.')
+    expect(getErrorMessage(error)).toBe(
+      'That Cloud Function is not deployed. Run firebase deploy --only functions.',
+    )
 
     const internalError = new FirebaseError('functions/internal', 'Internal error')
-    expect(getErrorMessage(internalError)).toBe('The function failed. Check its logs in the Firebase console.')
+    expect(getErrorMessage(internalError)).toBe(
+      'The function failed. Check its logs in the Firebase console.',
+    )
 
     const unavailableError = new FirebaseError('functions/unavailable', 'Unavailable')
-    expect(getErrorMessage(unavailableError)).toBe('Cloud Functions are unreachable. Deploy them or start the emulator.')
+    expect(getErrorMessage(unavailableError)).toBe(
+      'Cloud Functions are unreachable. Deploy them or start the emulator.',
+    )
   })
 
   it('falls back to error.message for unknown FirebaseError codes', () => {
