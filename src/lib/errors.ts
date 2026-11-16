@@ -26,7 +26,7 @@ const AUTH_ERROR_MESSAGES: Record<string, string> = {
 /** Extracts a friendly message from Firebase, Zod and generic errors. */
 export function getErrorMessage(error: unknown, fallback = 'Something went wrong.'): string {
   if (error instanceof FirebaseError) {
-    return AUTH_ERROR_MESSAGES[error.code] ?? error.message ?? fallback
+    return AUTH_ERROR_MESSAGES[error.code] ?? (error.message || fallback)
   }
 
   if (error instanceof Error) {
