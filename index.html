@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#09090b" />
+    <meta
+      name="description"
+      content="A production-minded React 19 + Firebase starter kit with authentication, role-based access control, Firestore CRUD and a polished admin dashboard."
+    />
+    <meta property="og:title" content="React Firebase Boilerplate" />
+    <meta
+      property="og:description"
+      content="React 19, TypeScript, Vite, Tailwind and the modular Firebase SDK, wired together with auth, RBAC and an admin dashboard."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>React Firebase Boilerplate</title>
+    <script>
+      try {
+        var stored = localStorage.getItem('rfb-theme')
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        var dark = stored === 'dark' || ((!stored || stored === 'system') && prefersDark)
+        if (dark) document.documentElement.classList.add('dark')
+        document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
+      } catch (error) {
+        // localStorage can be unavailable; fall back to the light theme.
+      }
+    </script>
+  </head>
+  <body class="h-full">
+    <div id="root" class="h-full"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

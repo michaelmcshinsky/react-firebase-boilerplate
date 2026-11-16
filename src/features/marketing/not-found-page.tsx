@@ -1,0 +1,32 @@
+import { ArrowLeft, Compass } from 'lucide-react'
+import { Link } from 'react-router-dom'
+
+import { Button } from '@/components/ui/button'
+
+export function NotFoundPage() {
+  return (
+    <div className="mx-auto flex min-h-[70vh] w-full max-w-lg flex-col items-center justify-center gap-5 px-4 text-center">
+      <div className="bg-primary/10 text-primary flex size-12 items-center justify-center rounded-full">
+        <Compass className="size-5" />
+      </div>
+      <div className="space-y-2">
+        <p className="text-muted-foreground font-mono text-xs tracking-widest">404</p>
+        <h1 className="text-3xl font-semibold tracking-tight">This page moved on</h1>
+        <p className="text-muted-foreground text-sm">
+          The link is broken or the page was removed. The dashboard is still where you left it.
+        </p>
+      </div>
+      <div className="flex flex-wrap justify-center gap-2">
+        <Button asChild>
+          <Link to="/dashboard">Go to dashboard</Link>
+        </Button>
+        <Button variant="outline" asChild>
+          <Link to="/">
+            <ArrowLeft className="size-4" />
+            Back home
+          </Link>
+        </Button>
+      </div>
+    </div>
+  )
+}

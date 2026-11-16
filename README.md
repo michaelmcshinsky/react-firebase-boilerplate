@@ -1,79 +1,232 @@
-> **Archived**
->
-> This repository is no longer maintained. It is kept for historical reference.
-
 # React Firebase Boilerplate
 
-Author: [Michael McShinsky](https://github.com/mmcshinsky) - [Linkedin](https://www.linkedin.com/in/michaelmcshinsky) | [Twitter](https://twitter.com/mikemcshinsky) | [Website](http://mcshinsky.net/)
+> A production-minded React 19 + Firebase starter kit with authentication, role-based access control, typed Firestore CRUD and a polished admin dashboard that already looks finished.
+
+**Stack:** React 19 · TypeScript · Vite · Tailwind CSS 4 · Firebase Modular SDK · Cloud Functions v2 · Vitest · Playwright
 
 ---
 
-A slightly opinionated yet minimal boilerplate for gettings a react firebase project off the ground quickly. Comes with the option to host with firebase as well as managed firestore rules.
+## What's Included
 
-Created to make my own life and others easier without having to recreate the wheel everytime a new project is started.
+### Authentication
+- Email/password registration and sign-in
+- Google OAuth provider
+- Password reset flow
+- Email verification with resend
+- Session persistence
+- Protected routes with loading states
 
-## Features
+### Authorization (RBAC)
+- Custom claims: `admin`, `editor`, `user`
+- Claims enforced in Firestore rules (source of truth)
+- Mirrored to user profiles for UI display
+- Route-level guards (`RequireAuth`, `RequireRole`)
+- Component-level helpers (`hasRole`, `can`, `canManageContent`)
 
-- React
-  - Function Components and Hooks
-  - Context and Redux State Management
-  - Public and Private Routing
-- Styling / CSS
-  - Bootstrap using reactstrap. Like I said... slightly opinionated project.
-  - Plain 'ole css styling in an assets folder. Bring in your styled components package if ya want.
-- Authentication
-  - Login
-  - Logout
-  - Registration
-  - Password Recovery / Reset
-- Authorization
-  - Claims & Roles (Admin, Editor, Employe, etc...)
-- Admin Panel
-  - CRUD Tables / Modals for managing Firebase documents
-  - Redux-Firebase with hooks for app wide access to firebase APIs.
-- Firebase
-  - Firestore / Managed Rules
-  - Hosting
-  - Functions
+### Admin Dashboard
+- Responsive shell with collapsible sidebar
+- Light/dark/system theme with persistence
+- Sortable, filterable, paginated data tables (TanStack Table)
+- Create/edit/delete dialogs with validation (React Hook Form + Zod)
+- Toast notifications (Sonner)
+- Empty, loading, and error states
 
-## Installation
+### Data Layer
+- Typed Firestore converters (timestamps → `Date`)
+- Streaming hooks: `useCollection`, `useDocument`
+- Service modules own all writes (`services/posts.ts`, `services/products.ts`, `services/users.ts`)
+- Optimistic UI updates
 
-1. Clone the repo: `git clone https://github.com/mmcshinsky/react-firebase-boilerplate.git`
-2. `cd react-firebase-boilerplate`
-3. Update the `.env` file(s) to match your [firebase settings](https://console.firebase.google.com/). (Gotta _"protect"_ those keys...)
-4. `npm install`
-5. `npm start`
-6. Open on [http://localhost:3000/](http://localhost:3000/) to view your app.
-7. Modify to your heart's content!
+### Firebase
+- Modular SDK initialization with emulator support
+- Firestore security rules (least privilege)
+- Storage rules (avatar uploads)
+- Cloud Functions v2: `setUserRoles`, `deleteUser`, `seed`
+- Auth triggers: profile creation on sign-up, deactivation on delete
+- Emulator-ready seed script (`npm run emulators && npm run seed`)
 
-## Firebase
+### Quality Gates
+- Strict TypeScript (`verbatimModuleSyntax`, `erasableSyntaxOnly`)
+- ESLint + Prettier with Tailwind plugin
+- Vitest + Testing Library (unit)
+- Playwright (E2E smoke tests)
+- GitHub Actions CI pipeline
 
-### Firestore
+---
 
-The boilerplate makes use of redux-firebase to give you access to firestore (and the realtime database) to manage all your data needs. With the use of hooks, you have access to your firebase instance throughout the app. As well, basic firestore rules are set for data security in the firestore.rules file at the root of the project.
+## Quick Start
 
-### Functions
+```bash
+git clone https://github.com/michaelmcshinsky/react-firebase-boilerplate.git
+cd react-firebase-boilerplate
+npm install
+cp .env.example .env   # add your Firebase web config
+npm run dev
+```
 
-This projects makes use of firebase functions in order to automate and keep some processes off of the client side app. This enables you to keep data like user objects safe for creation and deletion and leave those rules to both firebase functions and your firestore rules.
+Open http://localhost:3000. The landing page explains the stack and links to the sign-up page.
 
-#### What's Included?
+---
 
-1. onCreate => Store base user information on firestore upon user creation.
-2. onDelete => Set user as `active: false` upon user deletion.
-3. seed => A generalized function set to allow you to seed your firestore with data of your choice.
-   - You will need to set your auth header token from the current user `getIdToken` to hit the endpoint.Documentation can be found [here](https://firebase.google.com/docs/reference/js/firebase.User).
-   - Example Endpoint: `https://your-app-id.cloudfunctions.net/seed`
+## Environment Variables
 
-## Production Todos
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `VITE_FIREBASE_API_KEY` | Yes | Firebase web API key |
+| `VITE_FIREBASE_AUTH_DOMAIN` | Yes | `your-project.firebaseapp.com` |
+| `VITE_FIREBASE_PROJECT_ID` | Yes | Firebase project ID |
+| `VITE_FIREBASE_STORAGE_BUCKET` | Yes | `your-project.appspot.com` |
+| `VITE_FIREBASE_MESSAGING_SENDER_ID` | Yes | Sender ID from console |
+| `VITE_FIREBASE_APP_ID` | Yes | Web app ID from console |
+| `VITE_FIREBASE_MEASUREMENT_ID` | No | Analytics ID |
+| `VITE_USE_EMULATORS` | No | Set `true` to point at local emulators |
+| `VITE_APP_NAME` | No | App name shown in sidebar (default: "Northstar") |
 
-- [x] Create example views
-- [x] Create firebase seed and user functions
-- [ ] Create claim & role based authorization
-- [ ] Create testing suite
-- [ ] Create react-table wrapper with reactstrap
-- [ ] Update firestore rules
-- [ ] Create firebase storage use case with rules
-- [ ] Consolidate view code into more consumable components
-- [ ] Solidify readme with more information about project
-- [ ] Add social login options / components
-- [ ] User password reset on account page
+---
+
+## Firebase Setup
+
+1. **Create a Firebase project** at https://console.firebase.google.com
+2. **Enable Authentication** → Sign-in method → Email/Password (+ Google if desired)
+3. **Create Firestore database** → Production mode
+4. **Enable Storage** → Get started
+5. **Copy web app config** from Project Settings → Your apps
+6. **Deploy rules & indexes** (optional but recommended):
+   ```bash
+   firebase deploy --only firestore:rules,firestore:indexes,storage
+   ```
+7. **Deploy functions** (required for role management, seeding, account deletion):
+   ```bash
+   cd functions && npm install && cd ..
+   firebase deploy --only functions
+   ```
+
+---
+
+## Local Emulator Workflow
+
+```bash
+# Terminal 1: start emulators (Auth, Firestore, Functions, Storage, UI)
+npm run emulators
+
+# Terminal 2: seed demo accounts (admin@example.com / password123, etc.)
+npm run seed
+
+# Terminal 3: start Vite dev server
+npm run dev
+```
+
+The seed script creates:
+- `admin@example.com` (admin)
+- `editor@example.com` (editor)
+- `member@example.com` (user)
+- Sample posts and products
+
+---
+
+## Project Structure
+
+```
+react-firebase-boilerplate/
+├── functions/                 # Cloud Functions v2 (Node 22)
+│   └── src/
+│       ├── admin.ts           # Admin SDK init, role types
+│       ├── auth-triggers.ts   # onCreate/onDelete profile sync
+│       ├── admin-functions.ts # setUserRoles, deleteUser
+│       ├── seed.ts            # HTTP callable seed endpoint
+│       └── index.ts           # Exports
+├── public/                    # Static assets
+├── src/
+│   ├── app/
+│   │   ├── config/env.ts      # Env validation + constants
+│   │   ├── providers/         # AuthProvider, ThemeProvider, AppProviders
+│   │   └── router/            # React Router + guards
+│   ├── components/
+│   │   ├── ui/                # shadcn-style primitives (Radix + Tailwind)
+│   │   ├── forms/             # FormField wrapper
+│   │   ├── layout/            # AppShell, SidebarNav, UserMenu
+│   │   └── *.tsx              # DataTable, ConfirmDialog, EmptyState, etc.
+│   ├── features/
+│   │   ├── auth/              # Login, Register, ForgotPassword, schemas
+│   │   ├── dashboard/         # DashboardPage with activity feed
+│   │   ├── posts/             # PostsPage + PostFormDialog
+│   │   ├── products/          # ProductsPage + ProductFormDialog
+│   │   ├── users/             # UsersPage + MemberRolesDialog
+│   │   ├── account/           # Profile, avatar, password change
+│   │   ├── settings/          # Theme, env info, links
+│   │   └── marketing/         # LandingPage, NotFoundPage
+│   ├── hooks/                 # useCollection, useDocument, useAsyncAction, useDebouncedValue
+│   ├── lib/
+│   │   ├── firebase/          # client.ts, converters.ts, auth.ts, firestore.ts, storage.ts
+│   │   ├── utils.ts           # cn, slugify, initials, formatCurrency
+│   │   ├── dates.ts           # formatDate, formatRelative, formatDateTime
+│   │   ├── errors.ts          # Friendly Firebase error messages
+│   │   └── permissions.ts     # RBAC helpers
+│   ├── services/              # Server writes (posts, products, users)
+│   ├── styles/globals.css     # Tailwind v4 theme tokens
+│   ├── types/index.ts         # Shared type definitions
+│   ├── main.tsx               # App entry
+│   └── test/setup.ts          # Vitest setup
+├── e2e/                       # Playwright smoke tests
+├── scripts/seed.ts            # Emulator seed script (tsx)
+├── firebase.json              # Hosting, Functions, Emulators, Rules
+├── firestore.rules            # Security rules
+├── firestore.indexes.json     # Composite indexes
+├── storage.rules              # Storage rules
+└── vite.config.ts             # Vite + Tailwind plugin
+```
+
+---
+
+## Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start Vite dev server |
+| `npm run build` | Typecheck + production build |
+| `npm run preview` | Preview production build |
+| `npm run typecheck` | TypeScript build (no emit) |
+| `npm run lint` | ESLint with zero warnings |
+| `npm run format` | Prettier write |
+| `npm run format:check` | Prettier check |
+| `npm run test` | Vitest watch mode |
+| `npm run test:run` | Vitest single run |
+| `npm run test:coverage` | Vitest with coverage report |
+| `npm run e2e` | Playwright tests |
+| `npm run emulators` | Firebase Emulator Suite |
+| `npm run seed` | Seed emulator with demo data |
+| `npm run deploy` | Build + `firebase deploy` |
+
+---
+
+## Authorization Model
+
+```
+Custom Claims (source of truth) → Firestore Rules → Client UI
+```
+
+1. **Admin calls `setUserRoles(uid, ['editor'])`** → Cloud Function writes custom claims
+2. **Same function mirrors roles to `users/{uid}.roles`** → For admin UI display
+3. **Firestore rules read `request.auth.token.roles`** → Enforces access on every read/write
+4. **Client reads claims via `useAuth()`** → Gates routes and UI elements
+
+The profile document is **never trusted for access control** — it's only a mirror.
+
+---
+
+## Adding a New Feature
+
+1. **Types** – Define models in `src/types/index.ts`
+2. **Converters** – Add Firestore converter in `src/lib/firebase/converters.ts`
+3. **Services** – Create `src/services/feature.ts` with queries and mutations
+4. **Schemas** – Zod schemas in `src/features/feature/schema.ts`
+5. **UI** – Page + dialog components in `src/features/feature/`
+6. **Route** – Add to `src/app/router/router.tsx` with `RequireRole` if needed
+7. **Rules** – Update `firestore.rules` and `firestore.indexes.json`
+8. **Tests** – Add unit and E2E tests
+
+---
+
+## License
+
+MIT © [Michael McShinsky](https://github.com/michaelmcshinsky)

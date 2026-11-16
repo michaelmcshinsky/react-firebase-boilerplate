@@ -1,0 +1,7 @@
+dist
+coverage
+node_modules
+package-lock.json
+functions/lib
+playwright-report
+test-results

@@ -1,46 +1,73 @@
+rules_version = '2';
+
+// Authorization is driven by custom claims: { roles: ['admin' | 'editor' | 'user'] }.
+// The `users/{uid}` document mirrors those roles for the admin UI, but NEVER trust it
+// for access decisions. Claims are set server-side by the `setUserRoles` callable.
 service cloud.firestore {
   match /databases/{database}/documents {
-    
-    function getRole(role) {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role];
-    }
-    
-    function getKey(rsc, key) {
-    	return rsc.data[key];
-    }
-
-    function isSignedIn() {
+    function signedIn() {
       return request.auth != null;
     }
-    
-    function isOneOfRoles(rsc, array) {
-      return isSignedIn() && (getRole(rsc) in array);
+
+    function roles() {
+      return signedIn() ? request.auth.token.get('roles', []) : [];
     }
-    
-    function isOwner() {
-    	return isSignedIn() && request.auth.uid == request.resource.data.uid;
+
+    function hasAnyRole(roleList) {
+      return signedIn() && roles().hasAny(roleList);
     }
-    
+
+    function isAdmin() {
+      return hasAnyRole(['admin']);
+    }
+
+    function isStaff() {
+      return hasAnyRole(['admin', 'editor']);
+    }
+
+    function isSelf(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    // Fields a member may change on their own profile document.
+    function isOwnProfileUpdate() {
+      return !request.resource.data.diff(resource.data).affectedKeys()
+        .hasAny(['roles', 'active', 'email', 'createdAt']);
+    }
+
+    match /users/{uid} {
+      allow read: if isAdmin() || isSelf(uid);
+      allow create: if isAdmin()
+        || (isSelf(uid)
+          && request.resource.data.roles == ['user']
+          && request.resource.data.active == true);
+      allow update: if isAdmin() || (isSelf(uid) && isOwnProfileUpdate());
+      allow delete: if isAdmin();
+    }
+
+    match /posts/{postId} {
+      allow read: if isStaff()
+        || resource.data.status == 'published'
+        || isSelf(resource.data.authorId);
+      allow create: if signedIn()
+        && request.resource.data.authorId == request.auth.uid
+        && request.resource.data.status in ['draft', 'published']
+        && request.resource.data.title is string
+        && request.resource.data.title.size() <= 180;
+      allow update: if isStaff()
+        || (isSelf(resource.data.authorId)
+          && request.resource.data.authorId == resource.data.authorId);
+      allow delete: if isStaff() || isSelf(resource.data.authorId);
+    }
+
+    match /products/{productId} {
+      allow read: if isStaff() || resource.data.visibility == 'public';
+      allow create, update, delete: if isStaff();
+    }
+
+    // Deny everything that is not explicitly allowed above.
     match /{document=**} {
       allow read, write: if false;
     }
-    
-    match /users/{user} {
-      allow write: if getRole('admin') == true;
-      allow read: if getRole('admin') == true || isOwner();
-      allow create, delete: if isOneOfRoles(resource, ['admin']);
-    }
-
-    match /posts/{post} {
-      allow write: if getRole('admin') == true || isOwner();
-      allow read: if isOwner() || getKey(resource, 'status') == 'published';
-      allow create, delete: if isOneOfRoles(resource, ['admin']) || isOwner();
-    } 
-    
-    match /products/{product} {
-      allow write: if getRole('admin') == true || isOwner();
-      allow read: if isOwner() || getKey(resource, 'public') == true;
-      allow create, delete: if isOneOfRoles(resource, ['admin']) || isOwner();
-    } 
   }
 }
