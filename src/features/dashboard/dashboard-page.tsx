@@ -13,6 +13,7 @@ import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useAuth } from '@/app/providers/auth-context'
+import { useDocumentTitle } from '@/hooks/use-document-title'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -26,6 +27,7 @@ import { usersQuery } from '@/services/users'
 import type { Role } from '@/types'
 
 export function DashboardPage() {
+  useDocumentTitle('Dashboard')
   const { user, profile, roles, isAdmin, isStaff, emailVerified } = useAuth()
 
   const postsRef = useMemo(() => {

@@ -30,10 +30,12 @@ import { allProductsQuery, deleteProduct } from '@/services/products'
 import type { Product } from '@/types'
 
 import { ProductFormDialog } from './product-form-dialog'
+import { useDocumentTitle } from '@/hooks/use-document-title'
 
 type VisibilityFilter = 'all' | 'public' | 'private'
 
 export function ProductsPage() {
+  useDocumentTitle('Products')
   const [visibility, setVisibility] = useState<VisibilityFilter>('all')
   const [formOpen, setFormOpen] = useState(false)
   const [editing, setEditing] = useState<Product | null>(null)

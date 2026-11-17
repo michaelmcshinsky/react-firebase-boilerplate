@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowLeft, MailCheck } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
@@ -13,8 +13,10 @@ import { getErrorMessage } from '@/lib/errors'
 import { AuthLayout } from './auth-layout'
 import { ConfigNotice, FormError, SubmitSpinner } from './auth-parts'
 import { forgotPasswordSchema, type ForgotPasswordValues } from './schemas'
+import { useDocumentTitle } from '@/hooks/use-document-title'
 
 export function ForgotPasswordPage() {
+  useDocumentTitle('Reset password')
   const [sentTo, setSentTo] = useState<string | null>(null)
   const [formError, setFormError] = useState<string | null>(null)
 
@@ -22,10 +24,6 @@ export function ForgotPasswordPage() {
     resolver: zodResolver(forgotPasswordSchema),
     defaultValues: { email: '' },
   })
-
-  useEffect(() => {
-    document.title = 'Reset password · React Firebase Boilerplate'
-  }, [])
 
   async function onSubmit(values: ForgotPasswordValues) {
     setFormError(null)

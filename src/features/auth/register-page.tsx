@@ -1,10 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 
 import { useAuth } from '@/app/providers/auth-context'
+import { useDocumentTitle } from '@/hooks/use-document-title'
 import { FormField } from '@/components/forms/form-field'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -16,6 +17,7 @@ import { ConfigNotice, FormError, SubmitSpinner } from './auth-parts'
 import { registerSchema, type RegisterValues } from './schemas'
 
 export function RegisterPage() {
+  useDocumentTitle('Create account')
   const { status } = useAuth()
   const navigate = useNavigate()
   const [formError, setFormError] = useState<string | null>(null)
@@ -29,10 +31,6 @@ export function RegisterPage() {
       confirmPassword: '',
     },
   })
-
-  useEffect(() => {
-    document.title = 'Create account · React Firebase Boilerplate'
-  }, [])
 
   if (status === 'authenticated') {
     return <Navigate to="/dashboard" replace />

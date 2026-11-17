@@ -2,6 +2,7 @@ import { Link, Outlet } from 'react-router-dom'
 
 import { useAuth } from '@/app/providers/auth-context'
 import { Logo } from '@/components/logo'
+import { SkipLink } from '@/components/skip-link'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 
@@ -37,9 +38,10 @@ export function PublicLayout() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <SkipLink />
       <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
-          <Link to="/" className="rounded-md" aria-label="Home">
+          <Link to="/" className="rounded-md">
             <Logo />
           </Link>
 
@@ -90,7 +92,7 @@ export function PublicLayout() {
         </div>
       </header>
 
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         <Outlet />
       </main>
 

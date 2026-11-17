@@ -2,8 +2,10 @@ import { ArrowLeft, Compass } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
+import { useDocumentTitle } from '@/hooks/use-document-title'
 
 export function NotFoundPage() {
+  useDocumentTitle('Page not found')
   return (
     <div className="mx-auto flex min-h-[70vh] w-full max-w-lg flex-col items-center justify-center gap-5 px-4 text-center">
       <div className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">

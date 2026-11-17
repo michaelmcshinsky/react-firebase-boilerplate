@@ -18,6 +18,7 @@ import { toast } from 'sonner'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { useDocumentTitle } from '@/hooks/use-document-title'
 
 const HERO_POINTS = [
   'Email/password and Google sign-in',
@@ -110,6 +111,7 @@ const FAQ = [
 ]
 
 export function LandingPage() {
+  useDocumentTitle('React + Firebase starter')
   return (
     <>
       <Hero />
@@ -304,7 +306,7 @@ function AppPreview() {
         </span>
         <div>
           <p className="font-medium">Custom claims verified</p>
-          <p className="text-[10px] text-muted-foreground">admin · editor · member</p>
+          <p className="text-[11px] text-muted-foreground">admin · editor · member</p>
         </div>
       </div>
     </div>
@@ -384,9 +386,13 @@ function DeveloperExperience() {
             <span className="font-mono text-xs text-muted-foreground">
               src/app/router/router.tsx
             </span>
-            <span className="text-[10px] text-muted-foreground">excerpt</span>
+            <span className="text-[11px] text-muted-foreground">excerpt</span>
           </div>
-          <pre className="overflow-x-auto p-4 font-mono text-[12px] leading-relaxed">
+          <pre
+            className="overflow-x-auto p-4 font-mono text-[12px] leading-relaxed"
+            tabIndex={0}
+            aria-label="Router excerpt"
+          >
             <code>{`{/* admin-only route */}
 {
   path: '/users',
@@ -510,7 +516,11 @@ function CodeBlock({ code, className }: { code: string; className?: string }) {
           {copied ? <CheckCheck className="size-4" /> : <Copy className="size-4" />}
         </Button>
       </div>
-      <pre className="overflow-x-auto p-4 font-mono text-[12px] leading-relaxed">
+      <pre
+        className="overflow-x-auto p-4 font-mono text-[12px] leading-relaxed"
+        tabIndex={0}
+        aria-label="Terminal commands"
+      >
         <code>{code}</code>
       </pre>
     </div>
