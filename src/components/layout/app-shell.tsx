@@ -6,6 +6,7 @@ import { toast } from 'sonner'
 import { useAuth } from '@/app/providers/auth-context'
 import { Logo } from '@/components/logo'
 import { SidebarNav } from '@/components/layout/sidebar-nav'
+import { SkipLink } from '@/components/skip-link'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { UserMenu } from '@/components/layout/user-menu'
 import { Button } from '@/components/ui/button'
@@ -41,6 +42,7 @@ export function AppShell() {
 
   return (
     <div className="min-h-screen bg-muted/25">
+      <SkipLink />
       <aside className="fixed inset-y-0 left-0 hidden w-64 border-r bg-sidebar lg:block">
         <SidebarNav />
       </aside>
@@ -78,7 +80,7 @@ export function AppShell() {
           </div>
         </header>
 
-        <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
+        <main id="main-content" tabIndex={-1} className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
           <div className="mx-auto w-full max-w-6xl space-y-6">
             {error ? (
               <div className="rounded-xl border border-destructive/30 bg-destructive/8 px-4 py-3 text-sm text-destructive">

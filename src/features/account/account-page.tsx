@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
 import { useAuth } from '@/app/providers/auth-context'
+import { useDocumentTitle } from '@/hooks/use-document-title'
 import { FormField } from '@/components/forms/form-field'
 import { PageHeader } from '@/components/page-header'
 import { UserAvatar } from '@/components/user-avatar'
@@ -28,6 +29,7 @@ import {
 } from '@/features/auth/schemas'
 
 export function AccountPage() {
+  useDocumentTitle('Profile')
   const { user, profile, roles, refresh, hasRole } = useAuth()
   const [avatarPending, setAvatarPending] = useState(false)
   const [resendPending, setResendPending] = useState(false)

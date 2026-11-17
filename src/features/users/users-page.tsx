@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { toast } from 'sonner'
 
 import { useAuth } from '@/app/providers/auth-context'
+import { useDocumentTitle } from '@/hooks/use-document-title'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { DataTable, SortableHeader } from '@/components/data-table'
 import { PageHeader } from '@/components/page-header'
@@ -28,6 +29,7 @@ import { ROLE_META, type UserProfile } from '@/types'
 import { MemberRolesDialog } from './member-roles-dialog'
 
 export function UsersPage() {
+  useDocumentTitle('Members')
   const { user } = useAuth()
   const [editing, setEditing] = useState<UserProfile | null>(null)
   const [deleting, setDeleting] = useState<UserProfile | null>(null)

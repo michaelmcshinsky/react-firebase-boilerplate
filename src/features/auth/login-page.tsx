@@ -1,11 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 
 import { useAuth } from '@/app/providers/auth-context'
+import { useDocumentTitle } from '@/hooks/use-document-title'
 import { FormField } from '@/components/forms/form-field'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -41,6 +42,7 @@ function GoogleIcon() {
 }
 
 export function LoginPage() {
+  useDocumentTitle('Sign in')
   const { status } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
@@ -57,10 +59,6 @@ export function LoginPage() {
     resolver: zodResolver(loginSchema),
     defaultValues: { email: '', password: '' },
   })
-
-  useEffect(() => {
-    document.title = 'Sign in · React Firebase Boilerplate'
-  }, [])
 
   if (status === 'authenticated') {
     return <Navigate to={from} replace />

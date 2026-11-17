@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { toast } from 'sonner'
 
 import { useAuth } from '@/app/providers/auth-context'
+import { useDocumentTitle } from '@/hooks/use-document-title'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { DataTable, SortableHeader } from '@/components/data-table'
 import { PageHeader } from '@/components/page-header'
@@ -35,6 +36,7 @@ import { PostFormDialog } from './post-form-dialog'
 type StatusFilter = 'all' | 'published' | 'draft'
 
 export function PostsPage() {
+  useDocumentTitle('Posts')
   const { user, roles, isStaff } = useAuth()
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
   const [formOpen, setFormOpen] = useState(false)

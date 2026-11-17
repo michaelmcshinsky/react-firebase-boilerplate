@@ -2,6 +2,7 @@ import { Check, ExternalLink, Monitor, Moon, Sun, Terminal } from 'lucide-react'
 
 import { appName, firebaseConfig, isFirebaseConfigured, useEmulators } from '@/app/config/env'
 import { useAuth } from '@/app/providers/auth-context'
+import { useDocumentTitle } from '@/hooks/use-document-title'
 import { useTheme, type Theme } from '@/app/providers/theme-context'
 import { PageHeader } from '@/components/page-header'
 import { Badge } from '@/components/ui/badge'
@@ -18,6 +19,7 @@ const THEMES: Array<{ value: Theme; label: string; icon: typeof Sun }> = [
 ]
 
 export function SettingsPage() {
+  useDocumentTitle('Settings')
   const { theme, setTheme } = useTheme()
   const { user, profile, roles, isAdmin } = useAuth()
   const role = highestRole(roles)
