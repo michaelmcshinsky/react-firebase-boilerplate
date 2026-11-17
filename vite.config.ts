@@ -10,6 +10,10 @@ export default defineConfig({
     alias: {
       '@': path.resolve(import.meta.dirname, './src'),
     },
+    // Firebase keeps a single component registry per @firebase/app instance.
+    // Without dedupe, Vite can pre-bundle firebase/app and firebase/auth
+    // separately and "Component auth has not been registered yet" is thrown.
+    dedupe: ['firebase', '@firebase/app', '@firebase/app-compat', '@firebase/component'],
   },
   server: {
     port: 3000,
