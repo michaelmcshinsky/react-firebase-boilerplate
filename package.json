@@ -19,8 +19,9 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "test:rules": "firebase emulators:exec --only firestore --project demo-rfb-rules \"vitest run --config vitest.rules.config.ts\"",
+    "test:rules": "firebase emulators:exec --only firestore,storage --project demo-rfb-rules \"vitest run --config vitest.rules.config.ts\"",
     "e2e": "playwright test",
+    "test:e2e:auth": "firebase emulators:exec --only auth,firestore --project demo-rfb-rules \"npm run seed && playwright test --config playwright.auth.config.ts\"",
     "emulators": "firebase emulators:start",
     "seed": "tsx scripts/seed.ts",
     "deploy": "npm run build && firebase deploy",
@@ -82,6 +83,7 @@
     "vitest": "^5.1.0"
   },
   "overrides": {
-    "@firebase/app-compat": "0.5.22"
+    "@firebase/app-compat": "0.5.22",
+    "@firebase/app": "0.16.6"
   }
 }

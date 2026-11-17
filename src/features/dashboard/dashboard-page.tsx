@@ -19,7 +19,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Skeleton } from '@/components/ui/skeleton'
 import { useCollection } from '@/hooks/use-collection'
 import { formatRelative } from '@/lib/dates'
-import { cn } from '@/lib/utils'
+import { cn, pluralize } from '@/lib/utils'
 import { allPostsQuery, postsByAuthorQuery } from '@/services/posts'
 import { allProductsQuery } from '@/services/products'
 import { usersQuery } from '@/services/users'
@@ -132,7 +132,7 @@ export function DashboardPage() {
           icon={FileText}
           label="Posts"
           value={posts.loading ? null : posts.data.length}
-          detail={`${published} published · ${drafts} drafts`}
+          detail={`${published} published · ${pluralize(drafts, 'draft')}`}
         />
         <StatCard
           icon={Package}
