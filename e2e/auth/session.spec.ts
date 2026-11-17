@@ -72,6 +72,10 @@ test.describe('signed-in workspace', () => {
   test('dashboard has no serious accessibility violations', async ({ page }) => {
     await signIn(page, ACCOUNTS.admin)
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+
+    // Toasts are transient overlays; wait for the sign-in toast to leave so the
+    // scan covers the page itself rather than a notification mid-animation.
+    await expect(page.getByText('Welcome back')).toBeHidden({ timeout: 10_000 })
     await page.evaluate(() => document.fonts.ready)
 
     const { violations } = await new AxeBuilder({ page })
