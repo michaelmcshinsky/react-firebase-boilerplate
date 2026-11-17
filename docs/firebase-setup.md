@@ -80,7 +80,7 @@ reload the dashboard).
 ## 6. Local development with the emulator suite
 
 ```bash
-npm run emulators   # Auth 9099, Firestore 8080, Functions 5001, Storage 9199
+npm run emulators   # Auth 9099, Firestore 8085, Functions 5001, Storage 9199
 ```
 
 In `.env`:
