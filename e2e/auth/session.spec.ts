@@ -1,3 +1,4 @@
+import AxeBuilder from '@axe-core/playwright'
 import { expect, test, type Page } from '@playwright/test'
 
 const ACCOUNTS = {
@@ -66,5 +67,24 @@ test.describe('signed-in workspace', () => {
 
     await page.goto('/users')
     await expect(page.getByRole('heading', { name: 'Access restricted' })).toBeVisible()
+  })
+
+  test('dashboard has no serious accessibility violations', async ({ page }) => {
+    await signIn(page, ACCOUNTS.admin)
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+    await page.evaluate(() => document.fonts.ready)
+
+    const { violations } = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+      .analyze()
+
+    const serious = violations
+      .filter((violation) => violation.impact === 'serious' || violation.impact === 'critical')
+      .map(
+        (violation) =>
+          `${violation.id}: ${violation.nodes.map((node) => node.target.join(' ')).join(' | ')}`,
+      )
+
+    expect(serious).toEqual([])
   })
 })
