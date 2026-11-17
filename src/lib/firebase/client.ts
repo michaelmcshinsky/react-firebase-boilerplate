@@ -29,7 +29,7 @@ export function getFirebase(): FirebaseServices | null {
 
   if (useEmulators && !emulatorsConnected) {
     connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true })
-    connectFirestoreEmulator(db, '127.0.0.1', 8080)
+    connectFirestoreEmulator(db, '127.0.0.1', 8085)
     connectFunctionsEmulator(functions, '127.0.0.1', 5001)
     connectStorageEmulator(storage, '127.0.0.1', 9199)
     emulatorsConnected = true

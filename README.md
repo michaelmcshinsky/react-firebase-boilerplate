@@ -196,23 +196,37 @@ react-firebase-boilerplate/
 
 ## Available Scripts
 
-| Command                                 | Description                            |
-| --------------------------------------- | -------------------------------------- |
-| `npm run dev`                           | Start Vite dev server                  |
-| `npm run build`                         | Typecheck + production build           |
-| `npm run preview`                       | Preview production build               |
-| `npm run typecheck`                     | TypeScript build (no emit)             |
-| `npm run lint`                          | ESLint with zero warnings              |
-| `npm run format`                        | Prettier write                         |
-| `npm run format:check`                  | Prettier check                         |
-| `npm run test`                          | Vitest watch mode                      |
-| `npm run test:run`                      | Vitest single run                      |
-| `npm run test:coverage`                 | Vitest with coverage report            |
-| `npm run e2e`                           | Playwright tests                       |
-| `npm run emulators`                     | Firebase Emulator Suite                |
-| `npm run seed`                          | Seed emulator with demo data           |
-| `npm run grant:admin -- <email> [role]` | Write custom claims with the Admin SDK |
-| `npm run deploy`                        | Build + `firebase deploy`              |
+| Command                                 | Description                             |
+| --------------------------------------- | --------------------------------------- |
+| `npm run dev`                           | Start Vite dev server                   |
+| `npm run build`                         | Typecheck + production build            |
+| `npm run preview`                       | Preview production build                |
+| `npm run typecheck`                     | TypeScript build (no emit)              |
+| `npm run lint`                          | ESLint with zero warnings               |
+| `npm run format`                        | Prettier write                          |
+| `npm run format:check`                  | Prettier check                          |
+| `npm run test`                          | Vitest watch mode                       |
+| `npm run test:run`                      | Vitest single run                       |
+| `npm run test:coverage`                 | Vitest with coverage report             |
+| `npm run test:rules`                    | Firestore rules tests (emulator + Java) |
+| `npm run e2e`                           | Playwright tests                        |
+| `npm run emulators`                     | Firebase Emulator Suite                 |
+| `npm run seed`                          | Seed emulator with demo data            |
+| `npm run grant:admin -- <email> [role]` | Write custom claims with the Admin SDK  |
+| `npm run deploy`                        | Build + `firebase deploy`               |
+
+---
+
+## Testing
+
+| Layer          | Command              | What it protects                                               |
+| -------------- | -------------------- | -------------------------------------------------------------- |
+| Unit           | `npm run test:run`   | helpers, schemas, service payloads, route guards               |
+| Security rules | `npm run test:rules` | who may read/write each collection (Firestore emulator + Java) |
+| End-to-end     | `npm run e2e`        | public pages, form validation, guarded routes                  |
+
+Rules tests start their own emulator via `firebase emulators:exec`, so they do
+not need the suite running. CI runs all three in separate jobs.
 
 ---
 

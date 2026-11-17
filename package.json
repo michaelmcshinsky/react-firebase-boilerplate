@@ -19,6 +19,7 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
+    "test:rules": "firebase emulators:exec --only firestore --project demo-rfb-rules \"vitest run --config vitest.rules.config.ts\"",
     "e2e": "playwright test",
     "emulators": "firebase emulators:start",
     "seed": "tsx scripts/seed.ts",
@@ -53,6 +54,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@firebase/rules-unit-testing": "^5.0.2",
     "@playwright/test": "^1.65.1",
     "@tailwindcss/vite": "^4.3.5",
     "@testing-library/jest-dom": "^7.0.1",
@@ -78,5 +80,8 @@
     "typescript-eslint": "^8.73.0",
     "vite": "^8.3.8",
     "vitest": "^5.1.0"
+  },
+  "overrides": {
+    "@firebase/app-compat": "0.5.22"
   }
 }
