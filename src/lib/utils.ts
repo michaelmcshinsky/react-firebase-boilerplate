@@ -41,3 +41,8 @@ export function formatCurrency(value: number, currency = 'USD') {
     maximumFractionDigits: value % 1 === 0 ? 0 : 2,
   }).format(value)
 }
+
+/** "1 draft", "2 drafts" — keeps counts grammatical in UI copy. */
+export function pluralize(count: number, singular: string, plural = `${singular}s`) {
+  return `${count} ${count === 1 ? singular : plural}`
+}

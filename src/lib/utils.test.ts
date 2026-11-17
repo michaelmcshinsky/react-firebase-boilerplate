@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { cn, formatCurrency, initials, slugify } from './utils'
+import { cn, formatCurrency, initials, pluralize, slugify } from './utils'
 
 describe('slugify', () => {
   it('produces url-safe slugs', () => {
@@ -35,5 +35,18 @@ describe('cn', () => {
     expect(cn('px-2 text-sm', 'px-4')).toBe('text-sm px-4')
     const falsy = false
     expect(cn('hidden', falsy && 'block', undefined, 'flex')).toBe('flex')
+  })
+})
+
+describe('pluralize', () => {
+  it('uses the singular form for one', () => {
+    expect(pluralize(1, 'draft')).toBe('1 draft')
+    expect(pluralize(1, 'entry', 'entries')).toBe('1 entry')
+  })
+
+  it('uses the plural form for zero and more', () => {
+    expect(pluralize(0, 'draft')).toBe('0 drafts')
+    expect(pluralize(3, 'draft')).toBe('3 drafts')
+    expect(pluralize(2, 'entry', 'entries')).toBe('2 entries')
   })
 })

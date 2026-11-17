@@ -6,6 +6,8 @@ const PORT = 3210
 
 export default defineConfig({
   testDir: './e2e',
+  // The signed-in suite lives in e2e/auth and runs via test:e2e:auth.
+  testIgnore: ['auth/**'],
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
