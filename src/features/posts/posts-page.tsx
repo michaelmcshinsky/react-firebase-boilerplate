@@ -99,7 +99,7 @@ export function PostsPage() {
       cell: ({ row }) => (
         <div className="max-w-[26rem] min-w-0">
           <p className="truncate font-medium">{row.original.title}</p>
-          <p className="text-muted-foreground truncate text-xs">
+          <p className="truncate text-xs text-muted-foreground">
             {row.original.summary || 'No summary yet'}
           </p>
         </div>
@@ -118,14 +118,16 @@ export function PostsPage() {
       accessorKey: 'authorName',
       header: 'Author',
       cell: ({ row }) => (
-        <span className="text-muted-foreground text-sm">{row.original.authorName || '—'}</span>
+        <span className="text-sm text-muted-foreground">{row.original.authorName || '—'}</span>
       ),
     },
     {
       accessorKey: 'updatedAt',
       header: ({ column }) => <SortableHeader column={column}>Updated</SortableHeader>,
       cell: ({ row }) => (
-        <span className="text-muted-foreground text-sm">{formatRelative(row.original.updatedAt)}</span>
+        <span className="text-sm text-muted-foreground">
+          {formatRelative(row.original.updatedAt)}
+        </span>
       ),
     },
     {
@@ -229,7 +231,10 @@ export function PostsPage() {
           </Button>
         }
         filters={
-          <Select value={statusFilter} onValueChange={(value) => setStatusFilter(value as StatusFilter)}>
+          <Select
+            value={statusFilter}
+            onValueChange={(value) => setStatusFilter(value as StatusFilter)}
+          >
             <SelectTrigger size="sm" className="w-[150px]">
               <SelectValue />
             </SelectTrigger>

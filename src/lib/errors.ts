@@ -16,7 +16,8 @@ const AUTH_ERROR_MESSAGES: Record<string, string> = {
   'auth/requires-recent-login': 'Please sign in again before making this change.',
   'auth/operation-not-allowed': 'That sign-in method is not enabled in your Firebase project.',
   'permission-denied': 'You do not have permission to do that.',
-  'functions/not-found': 'That Cloud Function is not deployed. Run firebase deploy --only functions.',
+  'functions/not-found':
+    'That Cloud Function is not deployed. Run firebase deploy --only functions.',
   'functions/internal': 'The function failed. Check its logs in the Firebase console.',
   'functions/unavailable': 'Cloud Functions are unreachable. Deploy them or start the emulator.',
   unavailable: 'Cannot reach Firebase right now. Check your connection and try again.',
@@ -26,7 +27,7 @@ const AUTH_ERROR_MESSAGES: Record<string, string> = {
 /** Extracts a friendly message from Firebase, Zod and generic errors. */
 export function getErrorMessage(error: unknown, fallback = 'Something went wrong.'): string {
   if (error instanceof FirebaseError) {
-    return AUTH_ERROR_MESSAGES[error.code] ?? error.message ?? fallback
+    return AUTH_ERROR_MESSAGES[error.code] ?? (error.message || fallback)
   }
 
   if (error instanceof Error) {

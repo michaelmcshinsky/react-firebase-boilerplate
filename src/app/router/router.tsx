@@ -1,31 +1,57 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 
+import { FullPageLoader } from '@/components/full-page-loader'
 import { AppShell } from '@/components/layout/app-shell'
 import { PublicLayout } from '@/components/layout/public-layout'
-import { AccountPage } from '@/features/account/account-page'
-import { ForgotPasswordPage } from '@/features/auth/forgot-password-page'
-import { LoginPage } from '@/features/auth/login-page'
-import { RegisterPage } from '@/features/auth/register-page'
-import { DashboardPage } from '@/features/dashboard/dashboard-page'
-import { LandingPage } from '@/features/marketing/landing-page'
-import { NotFoundPage } from '@/features/marketing/not-found-page'
-import { PostsPage } from '@/features/posts/posts-page'
-import { ProductsPage } from '@/features/products/products-page'
-import { SettingsPage } from '@/features/settings/settings-page'
-import { UsersPage } from '@/features/users/users-page'
 
 import { RequireAuth } from './require-auth'
 import { RequireRole } from './require-role'
 
+/**
+ * Every page below the landing screen is code-split. The marketing page stays
+ * eager because it is the first paint for anonymous visitors; auth, dashboard
+ * and CRUD pages load on demand, which keeps the initial bundle small.
+ */
 export const router = createBrowserRouter([
   {
     element: <PublicLayout />,
+    hydrateFallbackElement: <FullPageLoader label="Loading…" />,
     children: [
-      { index: true, element: <LandingPage /> },
-      { path: 'login', element: <LoginPage /> },
-      { path: 'register', element: <RegisterPage /> },
-      { path: 'forgot-password', element: <ForgotPasswordPage /> },
-      { path: '*', element: <NotFoundPage /> },
+      {
+        index: true,
+        lazy: async () => {
+          const { LandingPage } = await import('@/features/marketing/landing-page')
+          return { Component: LandingPage }
+        },
+      },
+      {
+        path: 'login',
+        lazy: async () => {
+          const { LoginPage } = await import('@/features/auth/login-page')
+          return { Component: LoginPage }
+        },
+      },
+      {
+        path: 'register',
+        lazy: async () => {
+          const { RegisterPage } = await import('@/features/auth/register-page')
+          return { Component: RegisterPage }
+        },
+      },
+      {
+        path: 'forgot-password',
+        lazy: async () => {
+          const { ForgotPasswordPage } = await import('@/features/auth/forgot-password-page')
+          return { Component: ForgotPasswordPage }
+        },
+      },
+      {
+        path: '*',
+        lazy: async () => {
+          const { NotFoundPage } = await import('@/features/marketing/not-found-page')
+          return { Component: NotFoundPage }
+        },
+      },
     ],
   },
   {
@@ -34,27 +60,62 @@ export const router = createBrowserRouter([
         <AppShell />
       </RequireAuth>
     ),
+    hydrateFallbackElement: <FullPageLoader label="Loading your workspace…" />,
     children: [
-      { path: 'dashboard', element: <DashboardPage /> },
-      { path: 'posts', element: <PostsPage /> },
       {
-        path: 'products',
-        element: (
-          <RequireRole roles={['admin', 'editor']}>
-            <ProductsPage />
-          </RequireRole>
-        ),
+        path: 'dashboard',
+        lazy: async () => {
+          const { DashboardPage } = await import('@/features/dashboard/dashboard-page')
+          return { Component: DashboardPage }
+        },
       },
       {
-        path: 'users',
-        element: (
-          <RequireRole roles={['admin']}>
-            <UsersPage />
-          </RequireRole>
-        ),
+        path: 'posts',
+        lazy: async () => {
+          const { PostsPage } = await import('@/features/posts/posts-page')
+          return { Component: PostsPage }
+        },
       },
-      { path: 'settings', element: <SettingsPage /> },
-      { path: 'account', element: <AccountPage /> },
+      {
+        path: 'account',
+        lazy: async () => {
+          const { AccountPage } = await import('@/features/account/account-page')
+          return { Component: AccountPage }
+        },
+      },
+      {
+        path: 'settings',
+        lazy: async () => {
+          const { SettingsPage } = await import('@/features/settings/settings-page')
+          return { Component: SettingsPage }
+        },
+      },
+      {
+        // Role guards double as layout routes so the page chunk is only
+        // fetched after the guard allows it.
+        element: <RequireRole roles={['admin', 'editor']} />,
+        children: [
+          {
+            path: 'products',
+            lazy: async () => {
+              const { ProductsPage } = await import('@/features/products/products-page')
+              return { Component: ProductsPage }
+            },
+          },
+        ],
+      },
+      {
+        element: <RequireRole roles={['admin']} />,
+        children: [
+          {
+            path: 'users',
+            lazy: async () => {
+              const { UsersPage } = await import('@/features/users/users-page')
+              return { Component: UsersPage }
+            },
+          },
+        ],
+      },
     ],
   },
   // Older links from the pre-v2 admin panel.

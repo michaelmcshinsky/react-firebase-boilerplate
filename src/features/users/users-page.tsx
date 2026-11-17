@@ -83,10 +83,10 @@ export function UsersPage() {
               <p className="truncate font-medium">
                 {member.displayName || member.email.split('@')[0]}
                 {member.id === user?.uid ? (
-                  <span className="text-muted-foreground ml-1.5 text-xs font-normal">(you)</span>
+                  <span className="ml-1.5 text-xs font-normal text-muted-foreground">(you)</span>
                 ) : null}
               </p>
-              <p className="text-muted-foreground truncate text-xs">{member.email}</p>
+              <p className="truncate text-xs text-muted-foreground">{member.email}</p>
             </div>
           </div>
         )
@@ -132,7 +132,7 @@ export function UsersPage() {
       accessorKey: 'createdAt',
       header: ({ column }) => <SortableHeader column={column}>Joined</SortableHeader>,
       cell: ({ row }) => (
-        <span className="text-muted-foreground text-sm">{formatDate(row.original.createdAt)}</span>
+        <span className="text-sm text-muted-foreground">{formatDate(row.original.createdAt)}</span>
       ),
     },
     {
@@ -200,12 +200,13 @@ export function UsersPage() {
         description="Search accounts, inspect roles and keep claims in sync. Deleted members lose their auth account entirely."
       />
 
-      <div className="bg-muted/40 flex items-start gap-2.5 rounded-xl border px-4 py-3 text-sm">
-        <ShieldCheck className="text-primary mt-0.5 size-4 shrink-0" />
+      <div className="flex items-start gap-2.5 rounded-xl border bg-muted/40 px-4 py-3 text-sm">
+        <ShieldCheck className="mt-0.5 size-4 shrink-0 text-primary" />
         <p className="text-muted-foreground">
-          Role changes call the <code className="text-foreground font-mono text-xs">setUserRoles</code>{' '}
-          Cloud Function. Deploy functions (or run the emulator) before editing roles — the client
-          never writes claims directly.
+          Role changes call the{' '}
+          <code className="font-mono text-xs text-foreground">setUserRoles</code> Cloud Function.
+          Deploy functions (or run the emulator) before editing roles — the client never writes
+          claims directly.
         </p>
       </div>
 
@@ -244,7 +245,7 @@ export function UsersPage() {
         title="Delete member?"
         description={
           <>
-            <span className="text-foreground font-medium">
+            <span className="font-medium text-foreground">
               {deleting?.displayName || deleting?.email}
             </span>{' '}
             will lose access immediately. Their Firebase Auth account and profile document are

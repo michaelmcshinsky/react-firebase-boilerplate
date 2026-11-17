@@ -55,9 +55,7 @@ export function SettingsPage() {
                   onClick={() => setTheme(option.value)}
                   className={cn(
                     'relative flex flex-col items-start gap-3 rounded-lg border p-3 text-left transition-colors',
-                    theme === option.value
-                      ? 'border-primary/50 bg-primary/5'
-                      : 'hover:bg-muted/50',
+                    theme === option.value ? 'border-primary/50 bg-primary/5' : 'hover:bg-muted/50',
                   )}
                   aria-pressed={theme === option.value}
                 >
@@ -75,7 +73,7 @@ export function SettingsPage() {
                   </span>
                   <span className="text-sm font-medium">{option.label}</span>
                   {theme === option.value ? (
-                    <Check className="text-primary absolute top-3 right-3 size-3.5" />
+                    <Check className="absolute top-3 right-3 size-3.5 text-primary" />
                   ) : null}
                 </button>
               ))}
@@ -116,16 +114,16 @@ export function SettingsPage() {
             <CardDescription>Where to make this starter yours.</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3 sm:grid-cols-2">
-            <div className="bg-muted/40 rounded-lg border p-4">
+            <div className="rounded-lg border bg-muted/40 p-4">
               <p className="flex items-center gap-2 text-sm font-medium">
                 <Terminal className="size-4" />
                 Local emulator workflow
               </p>
-              <pre className="text-muted-foreground mt-2 font-mono text-[11px] leading-relaxed">
+              <pre className="mt-2 font-mono text-[11px] leading-relaxed text-muted-foreground">
                 <code>{'npm run emulators\nnpm run seed\nnpm run dev'}</code>
               </pre>
             </div>
-            <div className="bg-muted/40 space-y-2 rounded-lg border p-4">
+            <div className="space-y-2 rounded-lg border bg-muted/40 p-4">
               <p className="text-sm font-medium">Useful links</p>
               <ul className="space-y-1.5 text-sm">
                 {[
@@ -147,7 +145,7 @@ export function SettingsPage() {
                       href={link.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 transition-colors"
+                      className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {link.label}
                       <ExternalLink className="size-3" />
@@ -160,7 +158,7 @@ export function SettingsPage() {
         </Card>
       </div>
 
-      <p className="text-muted-foreground text-xs">
+      <p className="text-xs text-muted-foreground">
         Signed in as {profile?.displayName || user?.email || 'member'}.
       </p>
     </div>

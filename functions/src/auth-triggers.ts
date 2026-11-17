@@ -32,10 +32,9 @@ export const onUserCreated = auth.user().onCreate(async (user) => {
 })
 
 export const onUserDeleted = auth.user().onDelete(async (user) => {
-  await db.doc(`users/${user.uid}`).set(
-    { active: false, updatedAt: FieldValue.serverTimestamp() },
-    { merge: true },
-  )
+  await db
+    .doc(`users/${user.uid}`)
+    .set({ active: false, updatedAt: FieldValue.serverTimestamp() }, { merge: true })
 
   logger.info('Deactivated deleted member', { uid: user.uid })
 })

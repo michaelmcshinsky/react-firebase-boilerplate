@@ -98,7 +98,7 @@ export function LoginPage() {
       footer={
         <>
           New here?{' '}
-          <Link to="/register" className="text-foreground font-medium hover:underline">
+          <Link to="/register" className="font-medium text-foreground hover:underline">
             Create an account
           </Link>
         </>
@@ -125,7 +125,10 @@ export function LoginPage() {
             htmlFor="password"
             error={form.formState.errors.password?.message}
             hint={
-              <Link to="/forgot-password" className="hover:text-foreground underline-offset-4 hover:underline">
+              <Link
+                to="/forgot-password"
+                className="underline-offset-4 hover:text-foreground hover:underline"
+              >
                 Forgot password?
               </Link>
             }
@@ -147,7 +150,7 @@ export function LoginPage() {
 
         <div className="flex items-center gap-3">
           <Separator className="flex-1" />
-          <span className="text-muted-foreground text-xs">or</span>
+          <span className="text-xs text-muted-foreground">or</span>
           <Separator className="flex-1" />
         </div>
 

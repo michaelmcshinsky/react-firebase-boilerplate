@@ -15,7 +15,10 @@ export function validateAvatar(file: File): string | null {
   return null
 }
 
-export async function uploadAvatar(uid: string, file: File): Promise<{ url: string; path: string }> {
+export async function uploadAvatar(
+  uid: string,
+  file: File,
+): Promise<{ url: string; path: string }> {
   const problem = validateAvatar(file)
   if (problem) throw new Error(problem)
 

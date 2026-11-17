@@ -36,7 +36,11 @@ export function useCollection<T>(queryRef: Query<T> | null): CollectionState<T> 
     const unsubscribe = onSnapshot(
       queryRef,
       (snapshot) => {
-        setState({ data: snapshot.docs.map((document) => document.data()), loading: false, error: null })
+        setState({
+          data: snapshot.docs.map((document) => document.data()),
+          loading: false,
+          error: null,
+        })
       },
       (error) => {
         setState({ data: [], loading: false, error: getErrorMessage(error) })

@@ -6,13 +6,13 @@ import { Button } from '@/components/ui/button'
 export function NotFoundPage() {
   return (
     <div className="mx-auto flex min-h-[70vh] w-full max-w-lg flex-col items-center justify-center gap-5 px-4 text-center">
-      <div className="bg-primary/10 text-primary flex size-12 items-center justify-center rounded-full">
+      <div className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
         <Compass className="size-5" />
       </div>
       <div className="space-y-2">
-        <p className="text-muted-foreground font-mono text-xs tracking-widest">404</p>
+        <p className="font-mono text-xs tracking-widest text-muted-foreground">404</p>
         <h1 className="text-3xl font-semibold tracking-tight">This page moved on</h1>
-        <p className="text-muted-foreground text-sm">
+        <p className="text-sm text-muted-foreground">
           The link is broken or the page was removed. The dashboard is still where you left it.
         </p>
       </div>

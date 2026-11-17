@@ -15,13 +15,7 @@ function Table({ className, ...props }: ComponentProps<'table'>) {
 }
 
 function TableHeader({ className, ...props }: ComponentProps<'thead'>) {
-  return (
-    <thead
-      data-slot="table-header"
-      className={cn('[&_tr]:border-b', className)}
-      {...props}
-    />
-  )
+  return <thead data-slot="table-header" className={cn('[&_tr]:border-b', className)} {...props} />
 }
 
 function TableBody({ className, ...props }: ComponentProps<'tbody'>) {
@@ -38,7 +32,7 @@ function TableFooter({ className, ...props }: ComponentProps<'tfoot'>) {
   return (
     <tfoot
       data-slot="table-footer"
-      className={cn('bg-muted/40 border-t font-medium [&>tr]:last:border-b-0', className)}
+      className={cn('border-t bg-muted/40 font-medium [&>tr]:last:border-b-0', className)}
       {...props}
     />
   )
@@ -48,7 +42,7 @@ function TableRow({ className, ...props }: ComponentProps<'tr'>) {
   return (
     <tr
       data-slot="table-row"
-      className={cn('hover:bg-muted/40 border-b transition-colors', className)}
+      className={cn('border-b transition-colors hover:bg-muted/40', className)}
       {...props}
     />
   )
@@ -59,7 +53,7 @@ function TableHead({ className, ...props }: ComponentProps<'th'>) {
     <th
       data-slot="table-head"
       className={cn(
-        'text-muted-foreground h-10 px-3 text-left align-middle text-xs font-medium tracking-wider whitespace-nowrap uppercase',
+        'h-10 px-3 text-left align-middle text-xs font-medium tracking-wider whitespace-nowrap text-muted-foreground uppercase',
         className,
       )}
       {...props}
@@ -81,19 +75,10 @@ function TableCaption({ className, ...props }: ComponentProps<'caption'>) {
   return (
     <caption
       data-slot="table-caption"
-      className={cn('text-muted-foreground mt-4 text-sm', className)}
+      className={cn('mt-4 text-sm text-muted-foreground', className)}
       {...props}
     />
   )
 }
 
-export {
-  Table,
-  TableHeader,
-  TableBody,
-  TableFooter,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableCaption,
-}
+export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption }

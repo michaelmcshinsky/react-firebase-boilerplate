@@ -29,11 +29,11 @@ export function FormField({
           {label}
           {required ? <span className="text-destructive">*</span> : null}
         </Label>
-        {hint ? <span className="text-muted-foreground text-xs">{hint}</span> : null}
+        {hint ? <span className="text-xs text-muted-foreground">{hint}</span> : null}
       </div>
       {children}
       {error ? (
-        <p className="text-destructive text-xs" role="alert">
+        <p className="text-xs text-destructive" role="alert">
           {error}
         </p>
       ) : null}

@@ -19,6 +19,9 @@ export default defineConfig({
   },
   build: {
     sourcemap: true,
+    // The Firebase SDK is a single vendor chunk (~180 kB gzipped); the app
+    // itself is code-split per route and stays well under this limit.
+    chunkSizeWarningLimit: 700,
     rollupOptions: {
       output: {
         manualChunks(id) {

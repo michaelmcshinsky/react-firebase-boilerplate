@@ -62,7 +62,7 @@ export function RegisterPage() {
       footer={
         <>
           Already have an account?{' '}
-          <Link to="/login" className="text-foreground font-medium hover:underline">
+          <Link to="/login" className="font-medium text-foreground hover:underline">
             Sign in
           </Link>
         </>
@@ -134,7 +134,7 @@ export function RegisterPage() {
           </Button>
         </form>
 
-        <p className="text-muted-foreground text-xs leading-relaxed">
+        <p className="text-xs leading-relaxed text-muted-foreground">
           By creating an account you agree to the project’s terms. This starter ships without a
           marketing email pipeline or analytics.
         </p>

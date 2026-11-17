@@ -5,3 +5,5 @@ package-lock.json
 functions/lib
 playwright-report
 test-results
+
+netlify.toml

@@ -40,7 +40,7 @@ export function SortableHeader<TData, TValue>({
   return (
     <button
       type="button"
-      className="hover:text-foreground -ml-1 inline-flex items-center gap-1.5 rounded px-1 py-0.5 transition-colors"
+      className="-ml-1 inline-flex items-center gap-1.5 rounded px-1 py-0.5 transition-colors hover:text-foreground"
       onClick={() => column.toggleSorting(sorted === 'asc')}
     >
       {children}
@@ -116,7 +116,7 @@ export function DataTable<TData>({
         <div className="flex flex-1 flex-wrap items-center gap-2">
           {searchColumn ? (
             <div className="relative w-full sm:max-w-xs">
-              <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2" />
+              <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 value={filterValue}
                 onChange={(event) => search?.setFilterValue(event.target.value)}
@@ -131,7 +131,7 @@ export function DataTable<TData>({
         {actions ? <div className="flex items-center gap-2">{actions}</div> : null}
       </div>
 
-      <div className="bg-card overflow-hidden rounded-xl border">
+      <div className="overflow-hidden rounded-xl border bg-card">
         <Table>
           <TableHeader className="bg-muted/40">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -190,16 +190,17 @@ export function DataTable<TData>({
 
       {hasRows ? (
         <div className="flex flex-col gap-3 px-1 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-muted-foreground text-xs">
+          <p className="text-xs text-muted-foreground">
             Showing{' '}
-            <span className="text-foreground font-medium">
+            <span className="font-medium text-foreground">
               {table.getState().pagination.pageIndex * pageSize + 1}–
               {Math.min(
                 (table.getState().pagination.pageIndex + 1) * pageSize,
                 table.getFilteredRowModel().rows.length,
               )}
             </span>{' '}
-            of <span className="text-foreground font-medium">
+            of{' '}
+            <span className="font-medium text-foreground">
               {table.getFilteredRowModel().rows.length}
             </span>
           </p>
@@ -213,7 +214,7 @@ export function DataTable<TData>({
             >
               <ChevronLeft className="size-4" />
             </Button>
-            <span className="text-muted-foreground text-xs">
+            <span className="text-xs text-muted-foreground">
               Page {table.getState().pagination.pageIndex + 1} of{' '}
               {Math.max(table.getPageCount(), 1)}
             </span>

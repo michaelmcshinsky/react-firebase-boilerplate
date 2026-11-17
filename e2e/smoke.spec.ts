@@ -5,7 +5,9 @@ test.describe('public site', () => {
     await page.goto('/')
 
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Ship the app')
-    await expect(page.getByRole('heading', { name: 'The boring parts, already built' })).toBeVisible()
+    await expect(
+      page.getByRole('heading', { name: 'The boring parts, already built' }),
+    ).toBeVisible()
     await expect(page.getByRole('link', { name: 'View the source' })).toHaveAttribute(
       'href',
       'https://github.com/michaelmcshinsky/react-firebase-boilerplate',
@@ -38,8 +40,10 @@ test.describe('public site', () => {
     await expect(page.getByRole('heading', { name: 'This page moved on' })).toBeVisible()
   })
 
-  test('protected routes redirect to sign in', async ({ page }) => {
+  test('explains the missing Firebase configuration on protected routes', async ({ page }) => {
+    // Without VITE_FIREBASE_* env vars the guard renders the setup screen
+    // instead of a sign-in form that could never succeed.
     await page.goto('/dashboard')
-    await expect(page).toHaveURL(/\/login$/)
+    await expect(page.getByRole('heading', { name: 'Connect your Firebase project' })).toBeVisible()
   })
 })

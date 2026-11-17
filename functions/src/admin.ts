@@ -15,9 +15,7 @@ export type Role = (typeof ROLES)[number]
 
 export function isRoleArray(value: unknown): value is Role[] {
   return (
-    Array.isArray(value) &&
-    value.length > 0 &&
-    value.every((role) => ROLES.includes(role as Role))
+    Array.isArray(value) && value.length > 0 && value.every((role) => ROLES.includes(role as Role))
   )
 }
 

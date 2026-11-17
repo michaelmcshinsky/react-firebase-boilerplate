@@ -12,12 +12,10 @@ interface LogoProps {
 export function Logo({ className, showName = true, name = appName }: LogoProps) {
   return (
     <span className={cn('flex items-center gap-2.5', className)}>
-      <span className="from-primary to-primary/70 ring-primary/20 flex size-8 items-center justify-center rounded-lg bg-gradient-to-br text-white shadow-sm ring-1">
+      <span className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-white shadow-sm ring-1 ring-primary/20">
         <Sparkles className="size-4" aria-hidden />
       </span>
-      {showName ? (
-        <span className="text-sm font-semibold tracking-tight">{name}</span>
-      ) : null}
+      {showName ? <span className="text-sm font-semibold tracking-tight">{name}</span> : null}
     </span>
   )
 }

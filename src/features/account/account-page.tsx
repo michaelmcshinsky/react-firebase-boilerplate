@@ -49,7 +49,9 @@ export function AccountPage() {
     defaultValues: { currentPassword: '', newPassword: '', confirmPassword: '' },
   })
 
-  const hasPasswordProvider = user?.providerData.some((provider) => provider.providerId === 'password')
+  const hasPasswordProvider = user?.providerData.some(
+    (provider) => provider.providerId === 'password',
+  )
 
   async function saveProfile(values: ProfileValues) {
     if (!user) return
@@ -150,7 +152,7 @@ export function AccountPage() {
                   </Button>
                   {role ? <Badge variant="secondary">{ROLE_META[role].label}</Badge> : null}
                 </div>
-                <p className="text-muted-foreground text-xs">
+                <p className="text-xs text-muted-foreground">
                   PNG, JPG, WebP or GIF. Max 2 MB. Stored at avatars/{'{uid}'}/ in Firebase Storage.
                 </p>
                 <input
@@ -218,7 +220,7 @@ export function AccountPage() {
               <CardDescription>Used for sign-in and account recovery.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              <div className="bg-muted/40 flex items-center justify-between gap-3 rounded-lg border px-3 py-2.5">
+              <div className="flex items-center justify-between gap-3 rounded-lg border bg-muted/40 px-3 py-2.5">
                 <span className="truncate text-sm">{user?.email ?? '—'}</span>
                 <Badge variant={user?.emailVerified ? 'success' : 'warning'}>
                   {user?.emailVerified ? 'Verified' : 'Unverified'}
@@ -307,7 +309,7 @@ export function AccountPage() {
                   </Button>
                 </form>
               ) : (
-                <p className="text-muted-foreground text-sm">
+                <p className="text-sm text-muted-foreground">
                   Manage your password with your identity provider.
                 </p>
               )}
@@ -318,7 +320,7 @@ export function AccountPage() {
             <Card className="border-primary/20 bg-primary/5">
               <CardContent className="space-y-1 px-5 py-4">
                 <p className="text-sm font-medium">Administrator access</p>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-sm text-muted-foreground">
                   You can manage members, roles and every document in the workspace.
                 </p>
               </CardContent>
