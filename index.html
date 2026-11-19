@@ -5,6 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#09090b" />
+    <meta name="color-scheme" content="light dark" />
     <meta
       name="description"
       content="A production-minded React 19 + Firebase starter kit with authentication, role-based access control, Firestore CRUD and a polished admin dashboard."
@@ -29,6 +30,8 @@
         var dark = stored === 'dark' || ((!stored || stored === 'system') && prefersDark)
         if (dark) document.documentElement.classList.add('dark')
         document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
+        var meta = document.querySelector('meta[name="color-scheme"]')
+        if (meta) meta.setAttribute('content', dark ? 'dark' : 'light')
       } catch (error) {
         // localStorage can be unavailable; fall back to the light theme.
       }
