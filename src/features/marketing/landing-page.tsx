@@ -49,7 +49,7 @@ const FEATURES = [
   },
   {
     icon: Lock,
-    title: 'Rules that actually deny',
+    title: 'Rules that deny',
     body: 'Least-privilege Firestore and Storage rules, with self-service profile updates and staff-only writes baked in.',
   },
   {
@@ -141,7 +141,7 @@ function Hero() {
         <div className="animate-fade-up space-y-7">
           <Badge variant="outline" className="gap-1.5 rounded-full px-3 py-1 text-xs">
             <Sparkles className="size-3 text-primary" />
-            v2.0 — rebuilt on React 19 and the modular Firebase SDK
+            v2.0 · rebuilt on React 19 and the modular Firebase SDK
           </Badge>
 
           <div className="space-y-5">

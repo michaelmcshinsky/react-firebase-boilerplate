@@ -148,7 +148,7 @@ export function PostFormDialog({ open, onOpenChange, post }: PostFormDialogProps
             <Textarea
               id="body"
               rows={7}
-              placeholder="Markdown or plain text — your renderer, your rules."
+              placeholder="Markdown or plain text: your renderer, your rules."
               aria-invalid={Boolean(form.formState.errors.body)}
               {...form.register('body')}
             />
