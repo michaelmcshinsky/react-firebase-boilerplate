@@ -85,7 +85,8 @@
   },
   "overrides": {
     "@firebase/app-compat": "0.5.22",
-    "@firebase/app": "0.16.6"
+    "@firebase/app": "0.16.6",
+    "@grpc/grpc-js": "1.14.7"
   },
   "license": "MIT"
 }
