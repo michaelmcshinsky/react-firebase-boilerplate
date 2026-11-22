@@ -86,5 +86,6 @@
   "overrides": {
     "@firebase/app-compat": "0.5.22",
     "@firebase/app": "0.16.6"
-  }
+  },
+  "license": "MIT"
 }
