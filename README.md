@@ -114,6 +114,24 @@ Open http://localhost:3000. The landing page explains the stack and links to the
 
 Full walkthrough: [`docs/firebase-setup.md`](docs/firebase-setup.md).
 
+### Hosting targets
+
+The repo supports two hosting targets and both configs are intentional:
+
+- **Firebase Hosting** is canonical for the full deploy (`npm run deploy`
+  runs `firebase deploy`, which ships hosting + functions + rules + indexes
+  from `firebase.json`). Use this when you need the Cloud Functions and
+  Firestore rules deployed alongside the site.
+- **Netlify** (`netlify.toml`) is a static-hosting alternative: it runs
+  `npm run build`, publishes `dist`, and applies the SPA fallback.
+  Functions and rules are not covered by a Netlify deploy — deploy those
+  separately with `firebase deploy --only functions,firestore:rules,storage`.
+  See [`docs/firebase-setup.md`](docs/firebase-setup.md) §7.
+
+`public/_redirects` and `public/_headers` exist for the Netlify target;
+they are inert under Firebase Hosting (which has its own SPA rewrite and
+security headers in `firebase.json`).
+
 ---
 
 ## Local Emulator Workflow
