@@ -6,7 +6,7 @@ import { FirebaseError } from 'firebase/app'
 describe('getErrorMessage', () => {
   it('maps known Firebase auth error codes to friendly messages', () => {
     const error = new FirebaseError('auth/user-not-found', 'User not found')
-    expect(getErrorMessage(error)).toBe('No account exists for that email address.')
+    expect(getErrorMessage(error)).toBe('That email and password combination is not correct.')
   })
 
   it('maps weak password error', () => {

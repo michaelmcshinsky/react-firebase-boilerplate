@@ -1,11 +1,12 @@
 import { FirebaseError } from 'firebase/app'
 
 const AUTH_ERROR_MESSAGES: Record<string, string> = {
-  'auth/email-already-in-use': 'An account with that email already exists. Try signing in.',
+  'auth/email-already-in-use':
+    'We could not create your account. If you already have one, try signing in.',
   'auth/invalid-credential': 'That email and password combination is not correct.',
   'auth/invalid-email': 'Enter a valid email address.',
   'auth/user-disabled': 'This account has been disabled. Contact an administrator.',
-  'auth/user-not-found': 'No account exists for that email address.',
+  'auth/user-not-found': 'That email and password combination is not correct.',
   'auth/wrong-password': 'That email and password combination is not correct.',
   'auth/weak-password': 'Choose a stronger password with at least 8 characters.',
   'auth/too-many-requests': 'Too many attempts. Wait a moment and try again.',
