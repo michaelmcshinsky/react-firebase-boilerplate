@@ -74,8 +74,24 @@ GOOGLE_APPLICATION_CREDENTIALS=./service-account.json \
   npm run grant:admin -- you@company.com editor
 ```
 
-Claim changes apply to the user's next ID token refresh (sign out and in, or
-reload the dashboard).
+Claim changes apply to the user's **next ID token refresh**. ID tokens are
+cached for ~1 hour and only refreshed on sign-in, reload after expiry, or an
+explicit `getIdToken(true)` force-refresh, so a role change can take up to
+~1 hour to reach an already-signed-in client. Three ways to close the gap:
+
+- **Fast path (recommended):** after `setUserRoles` resolves, call
+  `user.getIdToken(true)` — already wired into `AuthProvider.refresh()`
+  (`src/app/providers/auth-provider.tsx`). Call `refresh()` right after a
+  role change instead of making the user sign out.
+- **Sign out and back in** — always works, but it's a poor UX for routine
+  role edits.
+- **Wait it out** — tokens refresh automatically; worst case is ~1 hour.
+
+Note the delay is on the **client side only**: Firestore rules read
+`request.auth.token.roles` from the token the client presents, so a stale
+token also means stale rule evaluation. The Admin SDK mirror
+(`users/{uid}.roles`) is written immediately and is only for display —
+it never grants access.
 
 ## 6. Local development with the emulator suite
 

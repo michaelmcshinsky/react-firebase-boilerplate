@@ -263,6 +263,22 @@ Custom Claims (source of truth) → Firestore Rules → Client UI
 
 The profile document is **never trusted for access control** — it's only a mirror.
 
+> **Role-change latency:** custom claims propagate to the client's ID token
+> on its next refresh (~1 hour for an already-signed-in session). Call
+> `AuthProvider.refresh()` (it force-refreshes the token) or have the user
+> sign out/in. Details: [`docs/firebase-setup.md`](docs/firebase-setup.md) §5.
+
+---
+
+## Firestore Cost & Scaling
+
+Firestore bills per document read/write — a `limit(50)` query still costs 50
+reads, and live `onSnapshot` listeners re-bill on every change. Before
+shipping to real users: paginate with cursors, push filters into queries,
+use `count()` for totals instead of fetching collections, and set a billing
+budget alert. Full guide for boilerplate buyers:
+[`docs/firestore-cost-scaling.md`](docs/firestore-cost-scaling.md).
+
 ---
 
 ## Adding a New Feature
